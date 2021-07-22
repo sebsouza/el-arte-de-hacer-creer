@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "el-arte-de-hacer-creer",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
