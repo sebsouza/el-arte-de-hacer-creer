@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Message, getMessage } from '../data/messages';
+import { useState } from "react";
+import { Stage, getStage } from "../data/stages";
 import {
   IonBackButton,
   IonButtons,
@@ -12,22 +12,22 @@ import {
   IonPage,
   IonToolbar,
   useIonViewWillEnter,
-} from '@ionic/react';
-import { personCircle } from 'ionicons/icons';
-import { useParams } from 'react-router';
-import './ViewMessage.css';
+} from "@ionic/react";
+import { personCircle } from "ionicons/icons";
+import { useParams } from "react-router";
+import "./ViewStage.css";
 
-function ViewMessage() {
-  const [message, setMessage] = useState<Message>();
+function ViewStage() {
+  const [stage, setStage] = useState<Stage>();
   const params = useParams<{ id: string }>();
 
   useIonViewWillEnter(() => {
-    const msg = getMessage(parseInt(params.id, 10));
-    setMessage(msg);
+    const msg = getStage(parseInt(params.id, 10));
+    setStage(msg);
   });
 
   return (
-    <IonPage id="view-message-page">
+    <IonPage id="view-stage-page">
       <IonHeader translucent>
         <IonToolbar>
           <IonButtons slot="start">
@@ -37,15 +37,15 @@ function ViewMessage() {
       </IonHeader>
 
       <IonContent fullscreen>
-        {message ? (
+        {stage ? (
           <>
             <IonItem>
               <IonIcon icon={personCircle} color="primary"></IonIcon>
               <IonLabel className="ion-text-wrap">
                 <h2>
-                  {message.fromName}
+                  {stage.fromName}
                   <span className="date">
-                    <IonNote>{message.date}</IonNote>
+                    <IonNote>{stage.date}</IonNote>
                   </span>
                 </h2>
                 <h3>
@@ -55,7 +55,7 @@ function ViewMessage() {
             </IonItem>
 
             <div className="ion-padding">
-              <h1>{message.subject}</h1>
+              <h1>{stage.subject}</h1>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -68,11 +68,11 @@ function ViewMessage() {
             </div>
           </>
         ) : (
-          <div>Message not found</div>
+          <div>Stage not found</div>
         )}
       </IonContent>
     </IonPage>
   );
 }
 
-export default ViewMessage;
+export default ViewStage;
