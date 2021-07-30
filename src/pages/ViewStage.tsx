@@ -40,14 +40,9 @@ function ViewStage() {
         {stage ? (
           <>
             <IonItem>
-              <IonIcon icon={personCircle} color="primary"></IonIcon>
+              <IonIcon color="primary"></IonIcon>
               <IonLabel className="ion-text-wrap">
-                <h2>
-                  {stage.fromName}
-                  <span className="date">
-                    <IonNote>{stage.date}</IonNote>
-                  </span>
-                </h2>
+                <h2>{stage.fromName}</h2>
                 <h3>
                   To: <IonNote>Me</IonNote>
                 </h3>

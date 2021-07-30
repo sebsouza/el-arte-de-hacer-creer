@@ -31,7 +31,7 @@ const Home: React.FC = () => {
   return (
     <IonPage id="home-page">
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonTitle>EL ARTE DE HACER CREER</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -46,7 +46,7 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <IonList>
+        <IonList className="items">
           {Stages.map((m) => (
             <StageListItem key={m.id} stage={m} />
           ))}

@@ -12,12 +12,6 @@
   font-weight: 600;
 }
 
-#view-stage-page ion-item .date {
-  float: right;
-  align-items: center;
-  display: flex;
-}
-
 #view-stage-page ion-item ion-icon {
   font-size: 42px;
   margin-right: 8px;
