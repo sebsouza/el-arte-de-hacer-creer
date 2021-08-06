@@ -1,26 +1,23 @@
-import MessageListItem from '../components/MessageListItem';
-import { useState } from 'react';
-import { Message, getMessages } from '../data/messages';
+import StageListItem from "../components/StageListItem";
+import { useState } from "react";
+import { Stage, getStages } from "../data/stages";
 import {
   IonContent,
   IonHeader,
   IonList,
   IonPage,
-  IonRefresher,
-  IonRefresherContent,
   IonTitle,
   IonToolbar,
-  useIonViewWillEnter
-} from '@ionic/react';
-import './Home.css';
+  useIonViewWillEnter,
+} from "@ionic/react";
+import "./Home.css";
 
 const Home: React.FC = () => {
-
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [Stages, setStages] = useState<Stage[]>([]);
 
   useIonViewWillEnter(() => {
-    const msgs = getMessages();
-    setMessages(msgs);
+    const msgs = getStages();
+    setStages(msgs);
   });
 
   const refresh = (e: CustomEvent) => {
@@ -32,25 +29,15 @@ const Home: React.FC = () => {
   return (
     <IonPage id="home-page">
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Inbox</IonTitle>
+        <IonToolbar color="primary">
+          <IonTitle>EL ARTE DE HACER CREER</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonRefresher slot="fixed" onIonRefresh={refresh}>
-          <IonRefresherContent></IonRefresherContent>
-        </IonRefresher>
-
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">
-              Inbox
-            </IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
-        <IonList>
-          {messages.map(m => <MessageListItem key={m.id} message={m} />)}
+        <IonList className="items">
+          {Stages.map((m) => (
+            <StageListItem key={m.id} stage={m} />
+          ))}
         </IonList>
       </IonContent>
     </IonPage>

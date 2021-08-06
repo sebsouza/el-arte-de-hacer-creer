@@ -1,0 +1,34 @@
+#view-stage-page ion-item {
+  --inner-padding-end: 0;
+  --background: transparent;
+}
+
+#view-stage-page ion-label {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+#view-stage-page ion-item h2 {
+  font-weight: 600;
+}
+
+#view-stage-page ion-item ion-icon {
+  font-size: 42px;
+  margin-right: 8px;
+}
+
+#view-stage-page ion-item ion-note {
+  font-size: 15px;
+  margin-right: 12px;
+  font-weight: normal;
+}
+
+#view-stage-page h1 {
+  margin: 0;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+#view-stage-page p {
+  line-height: 22px;
+}

@@ -1,6 +1,13 @@
 ion-item {
   --padding-start: 0;
   --inner-padding-end: 0;
+  width: 35%;
+  display: inline-block;
+  border: 1px solid #000;
+  border-radius: 15px;
+  text-align: center;
+  margin: 5rem 0;
+  max-height: 3rem;
 }
 
 ion-label {
@@ -18,12 +25,6 @@ ion-item p {
   overflow: hidden;
   white-space: nowrap;
   width: 95%;
-}
-
-ion-item .date {
-  float: right;
-  align-items: center;
-  display: flex;
 }
 
 ion-item ion-icon {
