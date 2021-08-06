@@ -6,8 +6,6 @@ import {
   IonHeader,
   IonList,
   IonPage,
-  IonRefresher,
-  IonRefresherContent,
   IonTitle,
   IonToolbar,
   useIonViewWillEnter,
@@ -36,16 +34,6 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonRefresher slot="fixed" onIonRefresh={refresh}>
-          <IonRefresherContent></IonRefresherContent>
-        </IonRefresher>
-
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Inbox</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
         <IonList className="items">
           {Stages.map((m) => (
             <StageListItem key={m.id} stage={m} />

@@ -5,15 +5,10 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonNote,
   IonPage,
   IonToolbar,
   useIonViewWillEnter,
 } from "@ionic/react";
-import { personCircle } from "ionicons/icons";
 import { useParams } from "react-router";
 import "./ViewStage.css";
 
@@ -31,7 +26,7 @@ function ViewStage() {
       <IonHeader translucent>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton text="Inbox" defaultHref="/home"></IonBackButton>
+            <IonBackButton text="Volver" defaultHref="/home"></IonBackButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
@@ -39,18 +34,10 @@ function ViewStage() {
       <IonContent fullscreen>
         {stage ? (
           <>
-            <IonItem>
-              <IonIcon color="primary"></IonIcon>
-              <IonLabel className="ion-text-wrap">
-                <h2>{stage.fromName}</h2>
-                <h3>
-                  To: <IonNote>Me</IonNote>
-                </h3>
-              </IonLabel>
-            </IonItem>
+            <h1 className="ion-padding">{stage.fromName}</h1>
 
             <div className="ion-padding">
-              <h1>{stage.subject}</h1>
+              <h2>{stage.subject}</h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -61,6 +48,7 @@ function ViewStage() {
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             </div>
+            <div></div>
           </>
         ) : (
           <div>Stage not found</div>
