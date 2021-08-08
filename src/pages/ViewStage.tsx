@@ -8,20 +8,32 @@ import {
   IonPage,
   IonToolbar,
   useIonViewWillEnter,
-  IonList,
   IonItem,
   IonGrid,
   IonRow,
   IonCol,
   IonAvatar,
   IonLabel,
+  IonButton,
 } from "@ionic/react";
+import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
 import "./ViewStage.css";
 
 function ViewStage() {
   const [stage, setStage] = useState<Stage>();
   const params = useParams<{ id: string }>();
+
+  Howler.autoUnlock = false;
+
+  var sound = new Howl({
+    src: ["assets/audios/keys.wav"],
+    onplayerror: function () {
+      sound.once("unlock", function () {
+        sound.play();
+      });
+    },
+  });
 
   useIonViewWillEnter(() => {
     const msg = getStage(parseInt(params.id, 10));
@@ -48,9 +60,12 @@ function ViewStage() {
                     <IonAvatar>
                       {/*   <img alt={stage.fromName} src={img(stage.avatar)} /> */}
                     </IonAvatar>
-                    <IonLabel className="ion-text-wrap">
-                      <h2>{stage.fromName}</h2>
-                    </IonLabel>
+                    <IonItem>
+                      <IonLabel className="ion-text-wrap">
+                        <h2>{stage.fromName}</h2>
+                      </IonLabel>
+                      <IonButton onClick={() => sound.play()}></IonButton>
+                    </IonItem>
                   </IonCol>
                 </IonRow>
               </IonGrid>
