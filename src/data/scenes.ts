@@ -12,7 +12,7 @@ const Scenes: Scene[] = [
     subject: "New event: Trip to Vegas",
     id: 0,
     avatar: "misterio.jpg",
-    sounds: [{ id: 0, name: "misterio1" }],
+    sounds: [{ id: 0, name: "keys.wav" }],
   },
   {
     fromName: "MAGIA",

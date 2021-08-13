@@ -53,9 +53,9 @@ function ViewScene() {
       <IonContent fullscreen>
         {scene ? (
           <IonContent fullscreen>
-            {scene.sounds.map((m) => (
-              <IonGrid>
-                <IonRow>
+            <IonGrid>
+              <IonRow>
+                {scene.sounds.map((m) => (
                   <IonCol>
                     <IonAvatar>
                       {/*   <img alt={scene.fromName} src={img(scene.avatar)} /> */}
@@ -67,9 +67,9 @@ function ViewScene() {
                       <IonButton onClick={() => sound.play()}></IonButton>
                     </IonItem>
                   </IonCol>
-                </IonRow>
-              </IonGrid>
-            ))}
+                ))}
+              </IonRow>
+            </IonGrid>
           </IonContent>
         ) : (
           <div>Scene not found</div>

@@ -2,9 +2,10 @@ ion-item {
   --padding-start: 0;
   --inner-padding-end: 0;
   width: 35%;
-  border: 1px solid #000;
-  border-radius: 15px;
   margin: 5rem 0;
+  --background: transparent;
+  --border-style: none;
+  --background-hover: none;
 }
 
 ion-label {
