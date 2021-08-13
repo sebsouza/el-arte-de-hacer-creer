@@ -20,12 +20,6 @@ const Home: React.FC = () => {
     setStages(msgs);
   });
 
-  const refresh = (e: CustomEvent) => {
-    setTimeout(() => {
-      e.detail.complete();
-    }, 3000);
-  };
-
   return (
     <IonPage id="home-page">
       <IonHeader>

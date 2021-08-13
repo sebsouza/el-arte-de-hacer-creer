@@ -8,13 +8,32 @@ import {
   IonPage,
   IonToolbar,
   useIonViewWillEnter,
+  IonItem,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonAvatar,
+  IonLabel,
+  IonButton,
 } from "@ionic/react";
+import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
 import "./ViewStage.css";
 
 function ViewStage() {
   const [stage, setStage] = useState<Stage>();
   const params = useParams<{ id: string }>();
+
+  Howler.autoUnlock = false;
+
+  var sound = new Howl({
+    src: ["assets/audios/keys.wav"],
+    onplayerror: function () {
+      sound.once("unlock", function () {
+        sound.play();
+      });
+    },
+  });
 
   useIonViewWillEnter(() => {
     const msg = getStage(parseInt(params.id, 10));
@@ -33,23 +52,25 @@ function ViewStage() {
 
       <IonContent fullscreen>
         {stage ? (
-          <>
-            <h1 className="ion-padding">{stage.fromName}</h1>
-
-            <div className="ion-padding">
-              <h2>{stage.subject}</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
-            <div></div>
-          </>
+          <IonContent fullscreen>
+            {stage.sounds.map((m) => (
+              <IonGrid>
+                <IonRow>
+                  <IonCol>
+                    <IonAvatar>
+                      {/*   <img alt={stage.fromName} src={img(stage.avatar)} /> */}
+                    </IonAvatar>
+                    <IonItem>
+                      <IonLabel className="ion-text-wrap">
+                        <h2>{stage.fromName}</h2>
+                      </IonLabel>
+                      <IonButton onClick={() => sound.play()}></IonButton>
+                    </IonItem>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
+            ))}
+          </IonContent>
         ) : (
           <div>Stage not found</div>
         )}
