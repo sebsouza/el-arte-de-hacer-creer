@@ -2,7 +2,7 @@ import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
-import ViewStage from "./pages/ViewStage";
+import ViewScene from "./pages/ViewScene";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -33,8 +33,8 @@ const App: React.FC = () => (
         <Route path="/home" exact={true}>
           <Home />
         </Route>
-        <Route path="/stage/:id">
-          <ViewStage />
+        <Route path="/scene/:id">
+          <ViewScene />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

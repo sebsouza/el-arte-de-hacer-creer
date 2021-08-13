@@ -6,26 +6,26 @@ import {
   IonRow,
   IonCol,
 } from "@ionic/react";
-import { Stage } from "../data/stages";
-import "./StageListItem.css";
+import { Scene } from "../data/scenes";
+import "./SceneListItem.css";
 
 import { img } from "../util";
 
-interface StageListItemProps {
-  stage: Stage;
+interface SceneListItemProps {
+  scene: Scene;
 }
 
-const StageListItem: React.FC<StageListItemProps> = ({ stage }) => {
+const SceneListItem: React.FC<SceneListItemProps> = ({ scene }) => {
   return (
-    <IonItem routerLink={`/stage/${stage.id}`} detail={false}>
+    <IonItem routerLink={`/scene/${scene.id}`} detail={false}>
       <IonGrid>
         <IonRow>
           <IonCol>
             <IonAvatar>
-              <img alt={stage.fromName} src={img(stage.avatar)} />
+              <img alt={scene.fromName} src={img(scene.avatar)} />
             </IonAvatar>
             <IonLabel className="ion-text-wrap">
-              <h2>{stage.fromName}</h2>
+              <h2>{scene.fromName}</h2>
             </IonLabel>
           </IonCol>
         </IonRow>
@@ -34,4 +34,4 @@ const StageListItem: React.FC<StageListItemProps> = ({ stage }) => {
   );
 };
 
-export default StageListItem;
+export default SceneListItem;

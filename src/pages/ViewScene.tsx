@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stage, getStage } from "../data/stages";
+import { Scene, getScene } from "../data/scenes";
 import {
   IonBackButton,
   IonButtons,
@@ -18,10 +18,10 @@ import {
 } from "@ionic/react";
 import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
-import "./ViewStage.css";
+import "./ViewScene.css";
 
-function ViewStage() {
-  const [stage, setStage] = useState<Stage>();
+function ViewScene() {
+  const [scene, setScene] = useState<Scene>();
   const params = useParams<{ id: string }>();
 
   Howler.autoUnlock = false;
@@ -36,12 +36,12 @@ function ViewStage() {
   });
 
   useIonViewWillEnter(() => {
-    const msg = getStage(parseInt(params.id, 10));
-    setStage(msg);
+    const msg = getScene(parseInt(params.id, 10));
+    setScene(msg);
   });
 
   return (
-    <IonPage id="view-stage-page">
+    <IonPage id="view-scene-page">
       <IonHeader translucent>
         <IonToolbar>
           <IonButtons slot="start">
@@ -51,18 +51,18 @@ function ViewStage() {
       </IonHeader>
 
       <IonContent fullscreen>
-        {stage ? (
+        {scene ? (
           <IonContent fullscreen>
-            {stage.sounds.map((m) => (
+            {scene.sounds.map((m) => (
               <IonGrid>
                 <IonRow>
                   <IonCol>
                     <IonAvatar>
-                      {/*   <img alt={stage.fromName} src={img(stage.avatar)} /> */}
+                      {/*   <img alt={scene.fromName} src={img(scene.avatar)} /> */}
                     </IonAvatar>
                     <IonItem>
                       <IonLabel className="ion-text-wrap">
-                        <h2>{stage.fromName}</h2>
+                        <h2>{scene.fromName}</h2>
                       </IonLabel>
                       <IonButton onClick={() => sound.play()}></IonButton>
                     </IonItem>
@@ -72,11 +72,11 @@ function ViewStage() {
             ))}
           </IonContent>
         ) : (
-          <div>Stage not found</div>
+          <div>Scene not found</div>
         )}
       </IonContent>
     </IonPage>
   );
 }
 
-export default ViewStage;
+export default ViewScene;

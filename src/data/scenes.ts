@@ -1,4 +1,4 @@
-export interface Stage {
+export interface Scene {
   fromName: string;
   subject: string;
   id: number;
@@ -6,7 +6,7 @@ export interface Stage {
   sounds: object[];
 }
 
-const Stages: Stage[] = [
+const Scenes: Scene[] = [
   {
     fromName: "MISTERIO",
     subject: "New event: Trip to Vegas",
@@ -37,6 +37,6 @@ const Stages: Stage[] = [
   },
 ];
 
-export const getStages = () => Stages;
+export const getScenes = () => Scenes;
 
-export const getStage = (id: number) => Stages.find((m) => m.id === id);
+export const getScene = (id: number) => Scenes.find((m) => m.id === id);

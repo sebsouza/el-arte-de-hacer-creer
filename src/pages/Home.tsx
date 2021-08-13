@@ -1,6 +1,6 @@
-import StageListItem from "../components/StageListItem";
+import SceneListItem from "../components/SceneListItem";
 import { useState } from "react";
-import { Stage, getStages } from "../data/stages";
+import { Scene, getScenes } from "../data/scenes";
 import {
   IonContent,
   IonHeader,
@@ -13,11 +13,11 @@ import {
 import "./Home.css";
 
 const Home: React.FC = () => {
-  const [Stages, setStages] = useState<Stage[]>([]);
+  const [Scenes, setScenes] = useState<Scene[]>([]);
 
   useIonViewWillEnter(() => {
-    const msgs = getStages();
-    setStages(msgs);
+    const msgs = getScenes();
+    setScenes(msgs);
   });
 
   return (
@@ -29,8 +29,8 @@ const Home: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonList className="items">
-          {Stages.map((m) => (
-            <StageListItem key={m.id} stage={m} />
+          {Scenes.map((m) => (
+            <SceneListItem key={m.id} scene={m} />
           ))}
         </IonList>
       </IonContent>
