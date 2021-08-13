@@ -20,6 +20,8 @@ import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
 import "./ViewScene.css";
 
+import { audio } from "../util";
+
 function ViewScene() {
   const [scene, setScene] = useState<Scene>();
   const params = useParams<{ id: string }>();
@@ -53,9 +55,9 @@ function ViewScene() {
       <IonContent fullscreen>
         {scene ? (
           <IonContent fullscreen>
-            {scene.sounds.map((m) => (
-              <IonGrid>
-                <IonRow>
+            <IonGrid>
+              <IonRow>
+                {scene.sounds.map((m) => (
                   <IonCol>
                     <IonAvatar>
                       {/*   <img alt={scene.fromName} src={img(scene.avatar)} /> */}
@@ -64,12 +66,24 @@ function ViewScene() {
                       <IonLabel className="ion-text-wrap">
                         <h2>{scene.fromName}</h2>
                       </IonLabel>
-                      <IonButton onClick={() => sound.play()}></IonButton>
+                      <IonButton
+                        onClick={() =>
+                          // new Howl({
+                          //   src: [audio(m)],
+                          //   onplayerror: function () {
+                          //     sound.once("unlock", function () {
+                          //       sound.play();
+                          //     });
+                          //   },
+                          // }).play()
+                          console.log(m)
+                        }
+                      ></IonButton>
                     </IonItem>
                   </IonCol>
-                </IonRow>
-              </IonGrid>
-            ))}
+                ))}
+              </IonRow>
+            </IonGrid>
           </IonContent>
         ) : (
           <div>Scene not found</div>
