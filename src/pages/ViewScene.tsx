@@ -57,6 +57,8 @@ function ViewScene() {
     Howler.stop();
   });
 
+  console.log(scene?.sounds);
+
   return (
     <IonPage id="view-scene-page">
       <IonHeader translucent>
@@ -78,9 +80,6 @@ function ViewScene() {
                       {/*   <img alt={scene.fromName} src={img(scene.avatar)} /> */}
                     </IonAvatar>
                     <IonItem>
-                      <IonLabel className="ion-text-wrap">
-                        {scene.fromName}
-                      </IonLabel>
                       <IonButton
                         onClick={() => {
                           const sound = new Howl({
@@ -95,7 +94,9 @@ function ViewScene() {
                           sound.play();
                           // console.log(m);
                         }}
-                      ></IonButton>
+                      >
+                        {m.name}
+                      </IonButton>
                     </IonItem>
                   </IonCol>
                 ))}
