@@ -3,7 +3,7 @@ export interface Scene {
   subject: string;
   id: number;
   avatar: string;
-  sounds: { id: number; name: string; src: string }[];
+  sounds: { id: number; src: string; name: string }[];
 }
 
 const Scenes: Scene[] = [

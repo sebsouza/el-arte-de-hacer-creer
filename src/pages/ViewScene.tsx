@@ -57,6 +57,8 @@ function ViewScene() {
     Howler.stop();
   });
 
+  console.log(scene?.sounds);
+
   return (
     <IonPage id="view-scene-page">
       <IonHeader translucent>
@@ -93,7 +95,9 @@ function ViewScene() {
                           sound.play();
                           // console.log(m);
                         }}
-                      ></IonButton>
+                      >
+                        {m.name}
+                      </IonButton>
                     </IonItem>
                   </IonCol>
                 ))}
