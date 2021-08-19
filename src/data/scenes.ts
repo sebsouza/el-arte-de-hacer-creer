@@ -3,7 +3,7 @@ export interface Scene {
   subject: string;
   id: number;
   avatar: string;
-  sounds: { id: number; src: string }[];
+  sounds: { id: number; name: string; src: string }[];
 }
 
 const Scenes: Scene[] = [
@@ -13,10 +13,10 @@ const Scenes: Scene[] = [
     id: 0,
     avatar: "misterio.jpg",
     sounds: [
-      { id: 0, src: "misterio0.mp3" },
-      { id: 1, src: "misterio1.mp3" },
-      { id: 2, src: "misterio2.mp3" },
-      { id: 3, src: "misterio3.mp3" },
+      { id: 0, name: "Main", src: "misterio0.mp3" },
+      { id: 1, name: "Cuerdas", src: "misterio1.mp3" },
+      { id: 2, name: "Pasos", src: "misterio2.mp3" },
+      { id: 3, name: "name", src: "misterio3.mp3" },
     ],
   },
   {
@@ -24,21 +24,21 @@ const Scenes: Scene[] = [
     subject: "Long time no chat",
     id: 1,
     avatar: "misterio.jpg",
-    sounds: [{ id: 1, src: "misterio1" }],
+    sounds: [{ id: 1, name: "name", src: "misterio1" }],
   },
   {
     fromName: "AVENTURA",
     subject: "Report Results",
     id: 2,
     avatar: "misterio.jpg",
-    sounds: [{ id: 2, src: "misterio1" }],
+    sounds: [{ id: 2, name: "name", src: "misterio1" }],
   },
   {
     fromName: "AEROPUERTO",
     subject: "The situation",
     id: 3,
     avatar: "misterio.jpg",
-    sounds: [{ id: 3, src: "misterio1" }],
+    sounds: [{ id: 3, name: "name", src: "misterio1" }],
   },
 ];
 

@@ -78,9 +78,7 @@ function ViewScene() {
                       {/*   <img alt={scene.fromName} src={img(scene.avatar)} /> */}
                     </IonAvatar>
                     <IonItem>
-                      <IonLabel className="ion-text-wrap">
-                        {scene.fromName}
-                      </IonLabel>
+                      <IonLabel className="ion-text-wrap">{m.name}</IonLabel>
                       <IonButton
                         onClick={() => {
                           const sound = new Howl({
