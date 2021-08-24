@@ -1,6 +1,5 @@
 export interface Scene {
   fromName: string;
-  subject: string;
   id: number;
   avatar: string;
   sounds: { id: number; src: string; name: string }[];
@@ -9,7 +8,6 @@ export interface Scene {
 const Scenes: Scene[] = [
   {
     fromName: "MISTERIO",
-    subject: "New event: Trip to Vegas",
     id: 0,
     avatar: "misterio.jpg",
     sounds: [
@@ -21,21 +19,18 @@ const Scenes: Scene[] = [
   },
   {
     fromName: "MAGIA",
-    subject: "Long time no chat",
     id: 1,
     avatar: "misterio.jpg",
     sounds: [{ id: 1, name: "name", src: "misterio1" }],
   },
   {
     fromName: "AVENTURA",
-    subject: "Report Results",
     id: 2,
     avatar: "misterio.jpg",
     sounds: [{ id: 2, name: "name", src: "misterio1" }],
   },
   {
     fromName: "AEROPUERTO",
-    subject: "The situation",
     id: 3,
     avatar: "misterio.jpg",
     sounds: [{ id: 3, name: "name", src: "misterio1" }],
