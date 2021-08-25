@@ -21,7 +21,7 @@ const Scenes: Scene[] = [
     fromName: "MAGIA",
     id: 1,
     avatar: "misterio.jpg",
-    sounds: [{ id: 1, name: "name", src: "misterio1" }],
+    sounds: [{ id: 1, name: "name", src: "misterio0.mp3" }],
   },
   {
     fromName: "AVENTURA",
