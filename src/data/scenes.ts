@@ -26,7 +26,7 @@ const Scenes: Scene[] = [
       { id: 0, name: "Magia", src: "magia0.mp3" },
       { id: 1, name: "Risa de bruja", src: "magia1.mp3" },
       { id: 2, name: "Polvo de hadas", src: "magia2.mp3" },
-      { id: 3, name: "Bosque encantado", src: "magia3.mp3" },
+      /* { id: 3, name: "Bosque encantado", src: "magia3.mp3" }, */
       { id: 4, name: "Dragon", src: "magia4.mp3" },
     ],
   },
@@ -36,10 +36,10 @@ const Scenes: Scene[] = [
     avatar: "aventura.png",
     sounds: [
       { id: 0, name: "Aventura", src: "aventura0.mp3" },
-      { id: 1, name: "Agua", src: "aventura1.mp3" },
-      { id: 2, name: "Explosión", src: "aventura2.mp3" },
-      { id: 3, name: "Espadas", src: "aventura3.mp3" },
-      { id: 4, name: "Gritos", src: "aventura4.mp3" },
+      { id: 1, name: "Explosión", src: "aventura1.mp3" },
+      { id: 2, name: "Espadas", src: "aventura2.mp3" },
+      /* { id: 3, name: "Espadas", src: "aventura3.mp3" },
+      { id: 4, name: "Gritos", src: "aventura4.mp3" }, */
     ],
   },
 ];
