@@ -1,4 +1,6 @@
 #view-stage-page ion-item {
+  display: flex;
+  flex-direction: column;
   --inner-padding-end: 0;
   --background: transparent;
 }

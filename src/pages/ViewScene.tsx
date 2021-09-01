@@ -14,13 +14,11 @@ import {
   IonCol,
   IonLabel,
   IonButton,
-  IonIcon,
-  IonToggle,
 } from "@ionic/react";
 import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
 import "./ViewScene.css";
-import { play, stop, volumeHigh, volumeMute } from "ionicons/icons";
+import {} from "ionicons/icons";
 
 import { audio } from "../util";
 
@@ -61,16 +59,6 @@ function ViewScene() {
     // };
   }, [scene]);
 
-  const fadeOut = () => {
-    howls.forEach((h) => {
-      if (h.volume() > 0.9) {
-        h.fade(1, 0, 2000);
-      } else if (h.volume(0)) {
-        h.fade(0, 1, 2000);
-      }
-    });
-  };
-
   console.log(Howler.volume());
 
   return (
@@ -80,20 +68,12 @@ function ViewScene() {
           <IonButtons slot="start">
             <IonBackButton text="Volver" defaultHref="/home"></IonBackButton>
           </IonButtons>
-          <IonButtons slot="end">
-            <IonIcon slot="icon-only" icon={volumeHigh} />
-            <IonToggle onClick={fadeOut} />
-            <IonIcon slot="icon-only" icon={volumeMute} />
-          </IonButtons>
         </IonToolbar>
       </IonHeader>
 
       {scene ? (
         <IonContent fullscreen>
           <IonGrid>
-            <IonRow>
-              <IonCol></IonCol>
-            </IonRow>
             <IonRow>
               {scene.sounds.slice(1).map((m) => (
                 <IonCol>
