@@ -11,29 +11,36 @@ const Scenes: Scene[] = [
     id: 0,
     avatar: "misterio.jpg",
     sounds: [
-      { id: 0, name: "Main", src: "misterio0.mp3" },
+      { id: 0, name: "Misterio", src: "misterio0.mp3" },
       { id: 1, name: "Cuerdas", src: "misterio1.mp3" },
       { id: 2, name: "Pasos", src: "misterio2.mp3" },
-      { id: 3, name: "name", src: "misterio3.mp3" },
+      { id: 3, name: "Telefono sonando", src: "misterio3.mp3" },
+      { id: 4, name: "Telefono ocupado", src: "misterio4.mp3" },
     ],
   },
   {
     fromName: "MAGIA",
     id: 1,
-    avatar: "misterio.jpg",
-    sounds: [{ id: 1, name: "name", src: "misterio0.mp3" }],
+    avatar: "magia.png",
+    sounds: [
+      { id: 0, name: "Magia", src: "magia0.mp3" },
+      { id: 1, name: "Risa de bruja", src: "magia1.mp3" },
+      { id: 2, name: "Polvo de hadas", src: "magia2.mp3" },
+      { id: 3, name: "Bosque encantado", src: "magia3.mp3" },
+      { id: 4, name: "Dragon", src: "magia4.mp3" },
+    ],
   },
   {
     fromName: "AVENTURA",
     id: 2,
-    avatar: "misterio.jpg",
-    sounds: [{ id: 2, name: "name", src: "misterio1" }],
-  },
-  {
-    fromName: "AEROPUERTO",
-    id: 3,
-    avatar: "misterio.jpg",
-    sounds: [{ id: 3, name: "name", src: "misterio1" }],
+    avatar: "aventura.png",
+    sounds: [
+      { id: 0, name: "Aventura", src: "aventura0.mp3" },
+      { id: 1, name: "Agua", src: "aventura1.mp3" },
+      { id: 2, name: "Explosión", src: "aventura2.mp3" },
+      { id: 3, name: "Espadas", src: "aventura3.mp3" },
+      { id: 4, name: "Gritos", src: "aventura4.mp3" },
+    ],
   },
 ];
 
