@@ -14,12 +14,10 @@
 
 #view-stage-page ion-item ion-icon {
   font-size: 42px;
-  margin-right: 8px;
 }
 
 #view-stage-page ion-item ion-note {
   font-size: 15px;
-  margin-right: 12px;
   font-weight: normal;
 }
 

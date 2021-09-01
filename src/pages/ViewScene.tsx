@@ -81,20 +81,6 @@ function ViewScene() {
             <IonBackButton text="Volver" defaultHref="/home"></IonBackButton>
           </IonButtons>
           <IonButtons slot="end">
-            <IonButton
-              onClick={() => {
-                Howler.stop();
-              }}
-            >
-              <IonIcon icon={stop}></IonIcon>
-            </IonButton>
-            <IonButton
-              onClick={() => {
-                howls[0].play();
-              }}
-            >
-              <IonIcon icon={play}></IonIcon>
-            </IonButton>
             <IonIcon slot="icon-only" icon={volumeHigh} />
             <IonToggle onClick={fadeOut} />
             <IonIcon slot="icon-only" icon={volumeMute} />
@@ -117,9 +103,7 @@ function ViewScene() {
                       onClick={() => {
                         howls[m.id].play();
                       }}
-                    >
-                      {m.name}
-                    </IonButton>
+                    ></IonButton>
                   </IonItem>
                 </IonCol>
               ))}
