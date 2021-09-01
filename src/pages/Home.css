@@ -6,3 +6,7 @@
   align-items: center;
   background: var(--ion-color-secondary);
 }
+
+.col {
+  margin: 0 5rem;
+}

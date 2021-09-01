@@ -4,10 +4,7 @@ import { Scene, getScenes } from "../data/scenes";
 import {
   IonCol,
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   useIonViewWillEnter,
   IonRow,
   IonGrid,
@@ -24,16 +21,11 @@ const Home: React.FC = () => {
 
   return (
     <IonPage id="home-page">
-      <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>EL ARTE DE HACER CREER</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent>
         <IonGrid className="grid">
           <IonRow>
             {Scenes.map((m) => (
-              <IonCol>
+              <IonCol className="col">
                 <SceneListItem key={m.id} scene={m} />
               </IonCol>
             ))}
