@@ -1,8 +1,7 @@
 ion-item {
   --padding-start: 0;
   --inner-padding-end: 0;
-  width: 35%;
-  margin: 5rem 0;
+
   --background: transparent;
   --border-style: none;
   --background-hover: none;
@@ -18,12 +17,12 @@ ion-item h2 {
   margin: 0;
 }
 
-ion-item p {
+/* ion-item p {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   width: 95%;
-}
+} */
 
 ion-item ion-icon {
   color: #c9c9ca;
