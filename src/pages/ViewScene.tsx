@@ -14,18 +14,27 @@ import {
   IonCol,
   IonLabel,
   IonButton,
+  IonImg,
 } from "@ionic/react";
 import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
 import "./ViewScene.css";
 import {} from "ionicons/icons";
-
 import { audio } from "../util";
+import { img } from "../util";
 
 function ViewScene() {
   const [scene, setScene] = useState<Scene>();
   const params = useParams<{ id: string }>();
   const [howls, setHowls] = useState<Howl[]>([]);
+  const [player, setPlayer] = useState<boolean[]>([]);
+  const [recorder, setRecorder] = useState<
+    {
+      timestamp: Date;
+      id: number;
+      player: boolean;
+    }[]
+  >([]);
 
   useIonViewWillEnter(() => {
     Howler.autoUnlock = false;
@@ -37,18 +46,20 @@ function ViewScene() {
   useEffect(() => {
     if (scene && scene !== null) {
       var _howls: Howl[] = [];
-
+      var _player: boolean[] = [];
       scene?.sounds.forEach((s) => {
         const id = s.id;
         _howls[id] = new Howl({
           src: [audio(s.src)],
           volume: 1,
         });
+        _player[id] = false;
       });
 
       _howls[0].play();
-
+      _player[0] = true;
       setHowls(_howls);
+      setPlayer(_player);
     }
     return () => {
       if (scene && scene !== null) {
@@ -77,13 +88,20 @@ function ViewScene() {
               {scene.sounds.slice(1).map((m) => (
                 <IonCol>
                   <IonItem>
-                    <IonLabel className="ion-text-wrap">{m.name}</IonLabel>
+                    <IonImg
+                      src={img(m.img)}
+                      onClick={() => {
+                        player[m.id] ? howls[m.id].stop() : howls[m.id].play();
+                        player[m.id] = !player[m.id];
+                      }}
+                    ></IonImg>
+                    {/* <IonLabel className="ion-text-wrap">{m.name}</IonLabel>
                     <IonButton
                       onClick={() => {
-                        howls[m.id].stop();
-                        howls[m.id].play();
+                        player[m.id] ? howls[m.id].stop() : howls[m.id].play();
+                        player[m.id] = !player[m.id];
                       }}
-                    ></IonButton>
+                    ></IonButton> */}
                   </IonItem>
                 </IonCol>
               ))}
