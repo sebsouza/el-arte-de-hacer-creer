@@ -46,20 +46,19 @@ function ViewScene() {
         });
       });
 
-      _howls[0].once("load", function () {
-        _howls[0].play();
-      });
+      _howls[0].play();
 
       setHowls(_howls);
     }
-    // return () => {
-    //   if (scene && scene !== null) {
-    //     fadeOut();
-    //   }
-    // };
+    return () => {
+      if (scene && scene !== null) {
+        scene?.sounds.forEach((s) => {
+          const id = s.id;
+          _howls[id].stop();
+        });
+      }
+    };
   }, [scene]);
-
-  console.log(Howler.volume());
 
   return (
     <IonPage id="view-scene-page">
@@ -81,6 +80,7 @@ function ViewScene() {
                     <IonLabel className="ion-text-wrap">{m.name}</IonLabel>
                     <IonButton
                       onClick={() => {
+                        howls[m.id].stop();
                         howls[m.id].play();
                       }}
                     ></IonButton>
