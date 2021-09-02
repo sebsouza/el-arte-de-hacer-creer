@@ -75,7 +75,7 @@ function ViewScene() {
           <IonGrid>
             <IonRow>
               {scene.sounds.slice(1).map((m) => (
-                <IonCol>
+                <IonCol key={m.id}>
                   <IonItem>
                     <IonLabel className="ion-text-wrap">{m.name}</IonLabel>
                     <IonButton
