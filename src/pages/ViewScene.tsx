@@ -31,7 +31,7 @@ function ViewScene() {
   const [player, setPlayer] = useState<boolean[]>([]);
   const [recorder, setRecorder] = useState<
     {
-      timestamp: Date;
+      step: number;
       id: number;
       player: boolean;
     }[]
@@ -53,6 +53,7 @@ function ViewScene() {
         _howls[id] = new Howl({
           src: [audio(s.src)],
           volume: 1,
+          loop: id === 0 ? true : false,
         });
         _player[id] = false;
       });

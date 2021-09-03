@@ -46,10 +46,31 @@ const Scenes: Scene[] = [
     avatar: "aventura.png",
     sounds: [
       { id: 0, name: "Aventura", src: "aventura0.mp3", img: "" },
-      { id: 1, name: "Explosión", src: "aventura1.mp3", img: "aventura1.png" },
-      { id: 2, name: "Espadas", src: "aventura2.mp3", img: "aventura2.png" },
-      /* { id: 3, name: "Espadas", src: "aventura3.mp3" ,img:"aventura3.png"},
-      { id: 4, name: "Gritos", src: "aventura4.mp3" ,img:"aventura4.png"}, */
+      {
+        id: 1,
+        name: "Barco",
+        src: "aventuraBarco.mp3",
+        img: "aventuraBarco.png",
+      },
+      { id: 2, name: "Agua", src: "aventuraAgua.mp3", img: "aventuraAgua.png" },
+      {
+        id: 3,
+        name: "Explosión",
+        src: "aventuraExplosion.mp3",
+        img: "aventuraExplosion.png",
+      },
+      {
+        id: 4,
+        name: "Espadas",
+        src: "aventuraEspadas.mp3",
+        img: "aventuraEspadas.png",
+      },
+      {
+        id: 5,
+        name: "Grito",
+        src: "aventuraGrito.mp3",
+        img: "aventuraGrito.png",
+      },
     ],
   },
 ];
