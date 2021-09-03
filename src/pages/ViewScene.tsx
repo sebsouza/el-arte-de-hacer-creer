@@ -12,14 +12,15 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonLabel,
-  IonButton,
   IonImg,
+  IonReorderGroup,
+  IonReorder,
+  IonIcon,
 } from "@ionic/react";
 import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
 import "./ViewScene.css";
-import {} from "ionicons/icons";
+import { closeCircleOutline } from "ionicons/icons";
 import { audio } from "../util";
 import { img } from "../util";
 
@@ -73,44 +74,48 @@ function ViewScene() {
 
   return (
     <IonPage id="view-scene-page">
-      <IonHeader translucent>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton text="Volver" defaultHref="/home"></IonBackButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <IonToolbar>
+        <IonButtons slot="start">
+          <IonBackButton defaultHref="/home"></IonBackButton>
+        </IonButtons>
+      </IonToolbar>
 
-      {scene ? (
-        <IonContent fullscreen>
-          <IonGrid>
-            <IonRow>
+      <IonContent fullscreen>
+        {scene ? (
+          <IonGrid className="gridscene">
+            <IonRow className="rowscene">
               {scene.sounds.slice(1).map((m) => (
                 <IonCol key={m.id}>
-                  <IonItem>
-                    <IonImg
-                      src={img(m.img)}
-                      onClick={() => {
-                        player[m.id] ? howls[m.id].stop() : howls[m.id].play();
-                        player[m.id] = !player[m.id];
-                      }}
-                    ></IonImg>
-                    {/* <IonLabel className="ion-text-wrap">{m.name}</IonLabel>
+                  <IonReorderGroup>
+                    <IonReorder>
+                      <IonItem>
+                        <IonImg
+                          src={img(m.img)}
+                          onClick={() => {
+                            player[m.id]
+                              ? howls[m.id].stop()
+                              : howls[m.id].play();
+                            player[m.id] = !player[m.id];
+                          }}
+                        ></IonImg>
+                        {/* <IonLabel className="ion-text-wrap">{m.name}</IonLabel>
                     <IonButton
                       onClick={() => {
                         player[m.id] ? howls[m.id].stop() : howls[m.id].play();
                         player[m.id] = !player[m.id];
                       }}
                     ></IonButton> */}
-                  </IonItem>
+                      </IonItem>
+                    </IonReorder>
+                  </IonReorderGroup>
                 </IonCol>
               ))}
             </IonRow>
           </IonGrid>
-        </IonContent>
-      ) : (
-        <div>Scene not found</div>
-      )}
+        ) : (
+          <div>Scene not found</div>
+        )}
+      </IonContent>
     </IonPage>
   );
 }

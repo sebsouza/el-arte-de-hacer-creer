@@ -32,3 +32,13 @@
 #view-stage-page p {
   line-height: 22px;
 }
+
+.gridscene {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.rowscene {
+  display: contents;
+}
