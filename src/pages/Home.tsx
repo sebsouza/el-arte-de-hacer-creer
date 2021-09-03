@@ -25,7 +25,7 @@ const Home: React.FC = () => {
         <IonGrid className="grid">
           <IonRow>
             {Scenes.map((m) => (
-              <IonCol className="col">
+              <IonCol className="col" key={m.id}>
                 <SceneListItem key={m.id} scene={m} />
               </IonCol>
             ))}
