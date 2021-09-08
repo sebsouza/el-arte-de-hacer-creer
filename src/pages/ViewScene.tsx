@@ -81,12 +81,12 @@ function ViewScene() {
         </IonButtons>
       </IonToolbar>
 
-      <IonContent fullscreen>
+      <IonContent className="contentScene">
         {scene ? (
-          <IonGrid className="gridscene">
-            <IonRow className="rowscene">
+          <IonGrid /* className="gridscene" */>
+            <IonRow className="ion-justify-content-center ion-align-items-end">
               {scene.sounds.slice(1).map((m) => (
-                <IonCol key={m.id}>
+                <IonCol key={m.id} size="1">
                   <IonReorderGroup>
                     <IonReorder>
                       <IonItem>

@@ -1,9 +1,9 @@
-#view-stage-page ion-item {
+/* #view-stage-page ion-item {
   display: flex;
   flex-direction: column;
   --inner-padding-end: 0;
   --background: transparent;
-}
+} */
 
 #view-stage-page ion-label {
   margin-top: 12px;
@@ -33,12 +33,27 @@
   line-height: 22px;
 }
 
-.gridscene {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
+/* .gridscene {
+   height: 100%; 
+   width: 50%; 
+   display: flex;
+  align-items: center; 
+} */
+/*
 .rowscene {
   display: contents;
+} */
+
+.contentScene {
+  --padding-start: 20%;
+  --padding-end: 20%;
+  --padding-top: 4%;
+  --padding-bottom: 8%;
+}
+
+ion-col {
+  /* border: 1px solid grey; */
+  /* text-align: center; */
+  /* vertical-align: baseline; */
+  --ion-grid-columns: 3;
 }
