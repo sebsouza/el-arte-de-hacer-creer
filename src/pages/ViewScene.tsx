@@ -4,7 +4,6 @@ import {
   IonBackButton,
   IonButtons,
   IonContent,
-  IonHeader,
   IonPage,
   IonToolbar,
   useIonViewWillEnter,
@@ -15,14 +14,14 @@ import {
   IonImg,
   IonReorderGroup,
   IonReorder,
-  IonIcon,
 } from "@ionic/react";
 import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
 import "./ViewScene.css";
-import { closeCircleOutline } from "ionicons/icons";
+
 import { audio } from "../util";
 import { img } from "../util";
+import { initialize } from "@ionic/core";
 
 function ViewScene() {
   const [scene, setScene] = useState<Scene>();
@@ -48,6 +47,7 @@ function ViewScene() {
     if (scene && scene !== null) {
       var _howls: Howl[] = [];
       var _player: boolean[] = [];
+
       scene?.sounds.forEach((s) => {
         const id = s.id;
         _howls[id] = new Howl({
@@ -83,13 +83,13 @@ function ViewScene() {
 
       <IonContent className="contentScene">
         {scene ? (
-          <IonGrid /* className="gridscene" */>
+          <IonGrid>
             <IonRow className="ion-justify-content-center ion-align-items-end">
               {scene.sounds.slice(1).map((m) => (
                 <IonCol key={m.id} size="1">
                   <IonReorderGroup>
                     <IonReorder>
-                      <IonItem>
+                      <IonItem className="custom-button">
                         <IonImg
                           src={img(m.img)}
                           onClick={() => {

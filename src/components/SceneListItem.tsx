@@ -1,22 +1,66 @@
-import { IonItem, IonImg, IonGrid, IonRow, IonCol } from "@ionic/react";
+import {
+  IonItem,
+  IonImg,
+  IonGrid,
+  IonRow,
+  IonCol,
+  CreateAnimation,
+  IonRouterLink,
+  RouteManagerContext,
+} from "@ionic/react";
+import { useRef } from "react";
 import { Scene } from "../data/scenes";
 import "./SceneListItem.css";
 import { img } from "../util";
+import { useHistory } from "react-router";
+import { NavigationRoute, Route, Router } from "workbox-routing";
+import { matchPath } from "react-router";
 interface SceneListItemProps {
   scene: Scene;
 }
 
+/* ANIMATION */
+
 const SceneListItem: React.FC<SceneListItemProps> = ({ scene }) => {
+  const animationRef = useRef<CreateAnimation>(null);
+  const history = useHistory();
+
+  const handleClick = async () => {
+    if (animationRef.current !== null) {
+      // Set up animation manually
+      await animationRef.current.setupAnimation({
+        duration: 1000,
+        fromTo: {
+          property: "transform",
+          fromValue: "translateY(0) translateX(0) rotate(0) scale(1)",
+          toValue: `translateY(0) translateX(0) rotate(360deg) scale(4)`,
+        },
+        easing: "ease-out",
+      });
+      // Play animation with animation reference
+      animationRef.current.animation.play();
+    }
+  };
+
   return (
-    <IonItem routerLink={`/scene/${scene.id}`} detail={false}>
-      <IonGrid>
-        <IonRow>
-          <IonCol>
-            <IonImg src={img(scene.avatar)}></IonImg>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
-    </IonItem>
+    <CreateAnimation ref={animationRef}>
+      <IonItem
+        onClick={(e) => {
+          e.preventDefault();
+          setTimeout(() => history.push(`/scene/${scene.id}`), 800);
+          handleClick();
+        }}
+        detail={false}
+      >
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonImg src={img(scene.avatar)}></IonImg>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonItem>
+    </CreateAnimation>
   );
 };
 
