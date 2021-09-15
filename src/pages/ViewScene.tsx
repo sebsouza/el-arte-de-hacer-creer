@@ -12,8 +12,6 @@ import {
   IonRow,
   IonCol,
   IonImg,
-  IonReorderGroup,
-  IonReorder,
 } from "@ionic/react";
 import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
@@ -21,7 +19,6 @@ import "./ViewScene.css";
 
 import { audio } from "../util";
 import { img } from "../util";
-import { initialize } from "@ionic/core";
 
 function ViewScene() {
   const [scene, setScene] = useState<Scene>();
@@ -87,28 +84,26 @@ function ViewScene() {
             <IonRow className="ion-justify-content-center ion-align-items-end">
               {scene.sounds.slice(1).map((m) => (
                 <IonCol key={m.id} size="1">
-                  <IonReorderGroup>
-                    <IonReorder>
-                      <IonItem className="custom-button">
-                        <IonImg
-                          src={img(m.img)}
-                          onClick={() => {
-                            player[m.id]
-                              ? howls[m.id].stop()
-                              : howls[m.id].play();
-                            player[m.id] = !player[m.id];
-                          }}
-                        ></IonImg>
-                        {/* <IonLabel className="ion-text-wrap">{m.name}</IonLabel>
+                  <IonItem
+                    onDrag={() => console.log("hola")}
+                    draggable="true"
+                    className="custom-button"
+                  >
+                    <IonImg
+                      src={img(m.img)}
+                      onClick={() => {
+                        player[m.id] ? howls[m.id].stop() : howls[m.id].play();
+                        player[m.id] = !player[m.id];
+                      }}
+                    ></IonImg>
+                    {/* <IonLabel className="ion-text-wrap">{m.name}</IonLabel>
                     <IonButton
                       onClick={() => {
                         player[m.id] ? howls[m.id].stop() : howls[m.id].play();
                         player[m.id] = !player[m.id];
                       }}
                     ></IonButton> */}
-                      </IonItem>
-                    </IonReorder>
-                  </IonReorderGroup>
+                  </IonItem>
                 </IonCol>
               ))}
             </IonRow>

@@ -33,7 +33,7 @@ const App: React.FC = () => (
         <Route path="/home" exact={true}>
           <Home />
         </Route>
-        <Route path="/scene/:id">
+        <Route path="/scene/:id" exact={true}>
           <ViewScene />
         </Route>
       </IonRouterOutlet>

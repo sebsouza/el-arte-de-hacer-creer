@@ -5,16 +5,13 @@ import {
   IonRow,
   IonCol,
   CreateAnimation,
-  IonRouterLink,
-  RouteManagerContext,
 } from "@ionic/react";
 import { useRef } from "react";
 import { Scene } from "../data/scenes";
 import "./SceneListItem.css";
 import { img } from "../util";
 import { useHistory } from "react-router";
-import { NavigationRoute, Route, Router } from "workbox-routing";
-import { matchPath } from "react-router";
+
 interface SceneListItemProps {
   scene: Scene;
 }
@@ -30,11 +27,13 @@ const SceneListItem: React.FC<SceneListItemProps> = ({ scene }) => {
       // Set up animation manually
       await animationRef.current.setupAnimation({
         duration: 1000,
+        fill: "none",
         fromTo: {
           property: "transform",
           fromValue: "translateY(0) translateX(0) rotate(0) scale(1)",
           toValue: `translateY(0) translateX(0) rotate(360deg) scale(4)`,
         },
+
         easing: "ease-out",
       });
       // Play animation with animation reference
