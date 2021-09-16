@@ -2,6 +2,7 @@ export interface Scene {
   fromName: string;
   id: number;
   avatar: string;
+  background: string;
   sounds: { id: number; src: string; name: string; img: string }[];
 }
 
@@ -10,6 +11,7 @@ const Scenes: Scene[] = [
     fromName: "MISTERIO",
     id: 0,
     avatar: "misterio.jpg",
+    background: "aventura.jpeg",
     sounds: [
       { id: 0, name: "Misterio", src: "misterio0.mp3", img: "" },
       { id: 1, name: "Cuerdas", src: "misterio1.mp3", img: "misterio1.png" },
@@ -32,6 +34,7 @@ const Scenes: Scene[] = [
     fromName: "MAGIA",
     id: 1,
     avatar: "magia.png",
+    background: "aventura.jpeg",
     sounds: [
       { id: 0, name: "Magia", src: "magia0.mp3", img: "" },
       { id: 1, name: "Risa de bruja", src: "magia1.mp3", img: "magia1.png" },
@@ -44,6 +47,7 @@ const Scenes: Scene[] = [
     fromName: "AVENTURA",
     id: 2,
     avatar: "aventura.png",
+    background: "aventura.jpeg",
     sounds: [
       { id: 0, name: "Aventura", src: "aventura0.mp3", img: "" },
       {

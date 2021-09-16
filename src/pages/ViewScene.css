@@ -51,6 +51,21 @@
   --padding-bottom: 8%;
 }
 
+.gridScene {
+  margin-top: 12rem;
+}
+
+.backButton {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.filter {
+  filter: contrast(0.4);
+  transition: 0.2s ease-out;
+}
+
 ion-col {
   /* border: 1px solid grey; */
   /* text-align: center; */
