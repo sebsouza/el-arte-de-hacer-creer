@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Scene, getScene } from "../data/scenes";
 import {
   IonBackButton,
@@ -7,11 +7,14 @@ import {
   IonPage,
   IonToolbar,
   useIonViewWillEnter,
+  useIonViewDidEnter,
   IonItem,
   IonGrid,
   IonRow,
   IonCol,
   IonImg,
+  createGesture,
+  Gesture,
 } from "@ionic/react";
 import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
@@ -41,6 +44,23 @@ function ViewScene() {
   });
 
   useEffect(() => {
+    scene?.sounds.slice(1).forEach((m) => {
+      // console.log(m.name);
+      const imageRef = document.querySelector(`#${m.name}`);
+      if (imageRef !== null) {
+        const gesture: Gesture = createGesture({
+          el: imageRef,
+          threshold: 15,
+          gestureName: "my-gesture",
+          onStart: (ev) => {
+            console.log(ev);
+            // onMoveHandler(ev)
+          },
+        });
+        gesture.enable();
+      }
+    });
+
     if (scene && scene !== null) {
       var _howls: Howl[] = [];
       var _player: boolean[] = [];
@@ -84,12 +104,10 @@ function ViewScene() {
             <IonRow className="ion-justify-content-center ion-align-items-end">
               {scene.sounds.slice(1).map((m) => (
                 <IonCol key={m.id} size="1">
-                  <IonItem
-                    onDrag={() => console.log("hola")}
-                    draggable="true"
-                    className="custom-button"
-                  >
+                  <IonItem className="custom-button">
                     <IonImg
+                      id={m.name}
+                      className="image-button"
                       src={img(m.img)}
                       onClick={() => {
                         player[m.id] ? howls[m.id].stop() : howls[m.id].play();
