@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Scene, getScene } from "../data/scenes";
 import {
-  IonContent,
   IonPage,
   useIonViewWillEnter,
-  useIonViewDidEnter,
   IonItem,
   IonGrid,
   IonRow,
@@ -27,6 +25,10 @@ function ViewScene() {
   const params = useParams<{ id: string }>();
   const [howls, setHowls] = useState<Howl[]>([]);
   const [player, setPlayer] = useState<boolean[]>([]);
+  const [deltaX, setDeltaX] = useState(0);
+  const [deltaY, setDeltaY] = useState(0);
+  const [dragging, setDragging] = useState(0);
+
   const [recorder, setRecorder] = useState<
     {
       step: number;
@@ -48,6 +50,10 @@ function ViewScene() {
     setTimeout(() => soundButton?.classList.remove("filter"), 200);
   }
 
+  // useEffect(() => {
+  //   console.log(deltaX);
+  // }, [deltaX]);
+
   useEffect(() => {
     scene?.sounds.slice(1).forEach((m) => {
       // console.log(m.name);
@@ -56,10 +62,19 @@ function ViewScene() {
         const gesture: Gesture = createGesture({
           el: imageRef,
           threshold: 15,
-          gestureName: "my-gesture",
+          gestureName: "soundsDrag",
           onStart: (ev) => {
             console.log(ev);
-            // onMoveHandler(ev)
+            setDragging(m.id);
+          },
+          onMove: (ev) => {
+            console.log(ev);
+            setDeltaX(ev.deltaX);
+            setDeltaY(ev.deltaY);
+          },
+          onEnd: (ev) => {
+            console.log(ev);
+            // setDragging(0);
           },
         });
         gesture.enable();
@@ -101,6 +116,9 @@ function ViewScene() {
       id="view-scene-page"
       style={{
         backgroundImage: `url(${background(scene?.background)})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
       }}
     >
       <IonButton
@@ -117,18 +135,23 @@ function ViewScene() {
           <IonRow className="ion-justify-content-center ion-align-items-end">
             {scene.sounds.slice(1).map((m) => (
               <IonCol key={m.id} size="1">
-                <IonItem className="custom-button">
-                  <IonImg
-                    id={m.name}
-                    className="image-button"
-                    src={img(m.img)}
-                    onClick={() => {
-                      soundSelected(m.name);
-                      player[m.id] ? howls[m.id].stop() : howls[m.id].play();
-                      player[m.id] = !player[m.id];
-                    }}
-                  ></IonImg>
-                </IonItem>
+                <IonImg
+                  id={m.name}
+                  className="image-button"
+                  src={img(m.img)}
+                  onClick={() => {
+                    soundSelected(m.name);
+                    player[m.id] ? howls[m.id].stop() : howls[m.id].play();
+                    player[m.id] = !player[m.id];
+                  }}
+                  style={
+                    dragging === m.id
+                      ? {
+                          transform: `translate(${deltaX}px, ${deltaY}px)`,
+                        }
+                      : {}
+                  }
+                ></IonImg>
               </IonCol>
             ))}
           </IonRow>

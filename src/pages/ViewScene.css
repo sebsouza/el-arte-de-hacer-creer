@@ -33,26 +33,8 @@
   line-height: 22px;
 }
 
-/* .gridscene {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;  
-} */
-/*
-.rowscene {
-  display: contents;
-} */
-
-.contentScene {
-  --padding-start: 20%;
-  --padding-end: 20%;
-  --padding-top: 4%;
-  --padding-bottom: 8%;
-}
-
 .gridScene {
-  margin-top: 12rem;
+  margin-top: 30vh;
 }
 
 .backButton {
@@ -71,4 +53,8 @@ ion-col {
   /* text-align: center; */
   /* vertical-align: baseline; */
   --ion-grid-columns: 3;
+}
+
+.image-button {
+  /* position: absolute; */
 }
