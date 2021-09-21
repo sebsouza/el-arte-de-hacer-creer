@@ -18,7 +18,7 @@ import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
 import "./ViewScene.css";
 
-import { audio } from "../util";
+import { audio, background } from "../util";
 import { img } from "../util";
 
 function ViewScene() {
@@ -96,7 +96,12 @@ function ViewScene() {
   }, [scene]);
 
   return (
-    <IonPage id="view-scene-page">
+    <IonPage
+      id="view-scene-page"
+      style={{
+        backgroundImage: `url(${background(scene?.background)})`,
+      }}
+    >
       <IonContent className="contentScene">
         <IonButton
           className="backButton"
