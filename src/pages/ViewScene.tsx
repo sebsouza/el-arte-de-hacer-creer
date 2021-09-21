@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Scene, getScene } from "../data/scenes";
 import {
-  IonContent,
   IonPage,
   useIonViewWillEnter,
-  useIonViewDidEnter,
   IonItem,
   IonGrid,
   IonRow,
@@ -20,7 +18,6 @@ import "./ViewScene.css";
 
 import { audio, background } from "../util";
 import { img } from "../util";
-import { isAbsolute } from "path";
 
 function ViewScene() {
   const [scene, setScene] = useState<Scene>();
@@ -50,7 +47,6 @@ function ViewScene() {
 
   useEffect(() => {
     scene?.sounds.slice(1).forEach((m) => {
-      // console.log(m.name);
       const imageRef = document.querySelector(`#${m.name}`);
       if (imageRef !== null) {
         const gesture: Gesture = createGesture({
@@ -59,7 +55,6 @@ function ViewScene() {
           gestureName: "my-gesture",
           onStart: (ev) => {
             console.log(ev);
-            // onMoveHandler(ev)
           },
         });
         gesture.enable();
@@ -103,13 +98,30 @@ function ViewScene() {
         backgroundImage: `url(${background(scene?.background)})`,
       }}
     >
-      <IonButton
-        className="backButton"
-        fill="default"
-        href="/home"
-        size="small"
-      >
-        Volver
+      <IonButton className="backButton" fill="default" href="/home">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="ionicon"
+          viewBox="0 0 512 512"
+          width="70"
+        >
+          <title>Arrow Back Circle</title>
+          <path
+            fill="none"
+            stroke={scene?.primaryColor}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
+            d="M249.38 336L170 256l79.38-80M181.03 256H342"
+          />
+          <path
+            d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"
+            fill="none"
+            stroke={scene?.primaryColor}
+            strokeMiterlimit="10"
+            strokeWidth="32"
+          />
+        </svg>
       </IonButton>
 
       {scene ? (

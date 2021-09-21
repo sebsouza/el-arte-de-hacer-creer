@@ -1,10 +1,3 @@
-/* #view-stage-page ion-item {
-  display: flex;
-  flex-direction: column;
-  --inner-padding-end: 0;
-  --background: transparent;
-} */
-
 #view-stage-page ion-label {
   margin-top: 12px;
   margin-bottom: 12px;
@@ -33,17 +26,6 @@
   line-height: 22px;
 }
 
-/* .gridscene {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;  
-} */
-/*
-.rowscene {
-  display: contents;
-} */
-
 .contentScene {
   --padding-start: 20%;
   --padding-end: 20%;
@@ -67,8 +49,9 @@
 }
 
 ion-col {
-  /* border: 1px solid grey; */
-  /* text-align: center; */
-  /* vertical-align: baseline; */
   --ion-grid-columns: 3;
+}
+
+.backButton {
+  height: 5.5rem;
 }

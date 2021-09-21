@@ -3,6 +3,7 @@ export interface Scene {
   id: number;
   avatar: string;
   background: string;
+  primaryColor: string;
   sounds: { id: number; src: string; name: string; img: string }[];
 }
 
@@ -10,8 +11,9 @@ const Scenes: Scene[] = [
   {
     fromName: "MISTERIO",
     id: 0,
-    avatar: "misterio.jpg",
-    background: "aventura.jpeg",
+    avatar: "misterio.png",
+    background: "misterio.jpeg",
+    primaryColor: "rgb(101,64,116)",
     sounds: [
       { id: 0, name: "Misterio", src: "misterio0.mp3", img: "" },
       { id: 1, name: "Cuerdas", src: "misterio1.mp3", img: "misterio1.png" },
@@ -34,12 +36,18 @@ const Scenes: Scene[] = [
     fromName: "MAGIA",
     id: 1,
     avatar: "magia.png",
-    background: "aventura.jpeg",
+    background: "magia.jpeg",
+    primaryColor: "rgb(0,96,136)",
     sounds: [
       { id: 0, name: "Magia", src: "magia0.mp3", img: "" },
       { id: 1, name: "Risa de bruja", src: "magia1.mp3", img: "magia1.png" },
       { id: 2, name: "Polvo de hadas", src: "magia2.mp3", img: "magia2.png" },
-      /* { id: 3, name: "Bosque encantado", src: "magia3.mp3" , img: "magia3.png" }, */
+      {
+        id: 3,
+        name: "Canto de las cigarras",
+        src: "magia3.mp3",
+        img: "magia3.png",
+      },
       { id: 4, name: "Dragon", src: "magia4.mp3", img: "magia4.png" },
     ],
   },
@@ -48,6 +56,7 @@ const Scenes: Scene[] = [
     id: 2,
     avatar: "aventura.png",
     background: "aventura.jpeg",
+    primaryColor: "rgb(0,97,134)",
     sounds: [
       { id: 0, name: "Aventura", src: "aventura0.mp3", img: "" },
       {
