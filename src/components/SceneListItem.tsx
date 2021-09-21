@@ -54,7 +54,7 @@ const SceneListItem: React.FC<SceneListItemProps> = ({ scene }) => {
         <IonGrid>
           <IonRow>
             <IonCol>
-              <IonImg src={img(scene.avatar)}></IonImg>
+              <IonImg className="avatar" src={img(scene.avatar)}></IonImg>
             </IonCol>
           </IonRow>
         </IonGrid>
