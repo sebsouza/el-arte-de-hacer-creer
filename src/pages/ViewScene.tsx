@@ -20,6 +20,7 @@ import "./ViewScene.css";
 
 import { audio, background } from "../util";
 import { img } from "../util";
+import { isAbsolute } from "path";
 
 function ViewScene() {
   const [scene, setScene] = useState<Scene>();
@@ -102,41 +103,39 @@ function ViewScene() {
         backgroundImage: `url(${background(scene?.background)})`,
       }}
     >
-      <IonContent className="contentScene">
-        <IonButton
-          className="backButton"
-          fill="default"
-          href="/home"
-          size="small"
-        >
-          Volver
-        </IonButton>
+      <IonButton
+        className="backButton"
+        fill="default"
+        href="/home"
+        size="small"
+      >
+        Volver
+      </IonButton>
 
-        {scene ? (
-          <IonGrid className="gridScene">
-            <IonRow className="ion-justify-content-center ion-align-items-end">
-              {scene.sounds.slice(1).map((m) => (
-                <IonCol key={m.id} size="1">
-                  <IonItem className="custom-button">
-                    <IonImg
-                      id={m.name}
-                      className="image-button"
-                      src={img(m.img)}
-                      onClick={() => {
-                        soundSelected(m.name);
-                        player[m.id] ? howls[m.id].stop() : howls[m.id].play();
-                        player[m.id] = !player[m.id];
-                      }}
-                    ></IonImg>
-                  </IonItem>
-                </IonCol>
-              ))}
-            </IonRow>
-          </IonGrid>
-        ) : (
-          <div>Scene not found</div>
-        )}
-      </IonContent>
+      {scene ? (
+        <IonGrid className="gridScene">
+          <IonRow className="ion-justify-content-center ion-align-items-end">
+            {scene.sounds.slice(1).map((m) => (
+              <IonCol key={m.id} size="1">
+                <IonItem className="custom-button">
+                  <IonImg
+                    id={m.name}
+                    className="image-button"
+                    src={img(m.img)}
+                    onClick={() => {
+                      soundSelected(m.name);
+                      player[m.id] ? howls[m.id].stop() : howls[m.id].play();
+                      player[m.id] = !player[m.id];
+                    }}
+                  ></IonImg>
+                </IonItem>
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
+      ) : (
+        <div>Scene not found</div>
+      )}
     </IonPage>
   );
 }
