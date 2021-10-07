@@ -12,7 +12,7 @@ const Scenes: Scene[] = [
     fromName: "MISTERIO",
     id: 0,
     avatar: "misterio.png",
-    background: "misterio.jpg",
+    background: "misterio.png",
     primaryColor: "rgb(101,64,116)",
     sounds: [
       { id: 0, name: "Misterio", src: "misterio0.mp3", img: "" },
@@ -42,7 +42,7 @@ const Scenes: Scene[] = [
     fromName: "MAGIA",
     id: 1,
     avatar: "magia.png",
-    background: "magia.jpg",
+    background: "magia.png",
     primaryColor: "rgb(0,96,136)",
     sounds: [
       { id: 0, name: "Magia", src: "magia0.mp3", img: "" },
