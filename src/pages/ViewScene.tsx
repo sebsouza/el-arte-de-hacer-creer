@@ -3,7 +3,6 @@ import { Scene, getScene } from "../data/scenes";
 import {
   IonPage,
   useIonViewWillEnter,
-  IonItem,
   IonGrid,
   IonRow,
   IonCol,
@@ -49,9 +48,23 @@ function ViewScene() {
     setTimeout(() => soundButton?.classList.remove("filter"), 200);
   }
 
-  // useEffect(() => {
-  //   console.log(deltaX);
-  // }, [deltaX]);
+  const playList = () => {
+    const list: Howl[] = [];
+    recorder.forEach((sound) => {
+      howls[sound.id].stop();
+      list.push(howls[sound.id]);
+    });
+
+    list[0].play();
+
+    for (let i = 0; i < list.length; i++) {
+      list[i].on("end", () => {
+        if (i !== list.length - 1) {
+          list[i + 1].play();
+        }
+      });
+    }
+  };
 
   useEffect(() => {
     scene?.sounds.slice(1).forEach((m) => {
@@ -62,16 +75,13 @@ function ViewScene() {
           threshold: 15,
           gestureName: "soundsDrag",
           onStart: (ev) => {
-            console.log(ev);
             setDragging(m.id);
           },
           onMove: (ev) => {
-            console.log(ev);
             setDeltaX(ev.deltaX);
             setDeltaY(ev.deltaY);
           },
           onEnd: (ev) => {
-            console.log(ev);
             // setDragging(0);
           },
         });
@@ -156,6 +166,10 @@ function ViewScene() {
                   src={img(m.img)}
                   onClick={() => {
                     soundSelected(m.name);
+                    setRecorder([
+                      ...recorder,
+                      { step: m.id, id: m.id, player: false },
+                    ]);
                     player[m.id] ? howls[m.id].stop() : howls[m.id].play();
                     player[m.id] = !player[m.id];
                   }}
@@ -170,6 +184,10 @@ function ViewScene() {
               </IonCol>
             ))}
           </IonRow>
+          <IonImg
+            onClick={playList}
+            src="/public/assets/images/escenas/aventuraBarco.png"
+          ></IonImg>
         </IonGrid>
       ) : (
         <div>Scene not found</div>
