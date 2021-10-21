@@ -4,16 +4,20 @@ export interface Scene {
   avatar: string;
   background: string;
   primaryColor: string;
+  playButton: string;
+  bar: string;
   sounds: { id: number; src: string; name: string; img: string }[];
 }
 
 const Scenes: Scene[] = [
   {
-    fromName: "MISTERIO",
+    fromName: "misterio",
     id: 0,
     avatar: "misterio.png",
     background: "misterio.png",
     primaryColor: "rgb(101,64,116)",
+    playButton: "misterioPlay.png",
+    bar: "misterioBarra.png",
     sounds: [
       { id: 0, name: "Misterio", src: "misterio0.mp3", img: "" },
       {
@@ -49,6 +53,8 @@ const Scenes: Scene[] = [
     avatar: "magia.png",
     background: "magia.png",
     primaryColor: "rgb(0,96,136)",
+    playButton: "magiaPlay.png",
+    bar: "magiaBarra.png",
     sounds: [
       { id: 0, name: "Magia", src: "magia0.mp3", img: "" },
       { id: 1, name: "Hechizo", src: "magia1.mp3", img: "magiaHechizo.png" },
@@ -77,8 +83,10 @@ const Scenes: Scene[] = [
     fromName: "AVENTURA",
     id: 2,
     avatar: "aventura.png",
-    background: "aventura.jpg",
+    background: "aventura.png",
     primaryColor: "rgb(0,97,134)",
+    playButton: "aventuraPlay.png",
+    bar: "aventuraBarra.png",
     sounds: [
       { id: 0, name: "Aventura", src: "aventura0.mp3", img: "" },
       {

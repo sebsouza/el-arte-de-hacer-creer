@@ -11,6 +11,8 @@ import {
 } from "@ionic/react";
 import "./Home.css";
 
+import { background } from "../util";
+
 const Home: React.FC = () => {
   const [Scenes, setScenes] = useState<Scene[]>([]);
 
@@ -22,7 +24,15 @@ const Home: React.FC = () => {
   return (
     <IonPage id="home-page">
       <IonContent>
-        <IonGrid className="grid">
+        <IonGrid
+          style={{
+            backgroundImage: `url(${background("home.jpg")})`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+          className="grid"
+        >
           <IonRow>
             {Scenes.map((m) => (
               <IonCol className="col" key={m.id}>

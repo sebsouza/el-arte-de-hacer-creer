@@ -66,29 +66,38 @@ function ViewScene() {
     }
   };
 
-  useEffect(() => {
-    scene?.sounds.slice(1).forEach((m) => {
-      const imageRef = document.querySelector(`#${m.name}`);
-      if (imageRef !== null) {
-        const gesture: Gesture = createGesture({
-          el: imageRef,
-          threshold: 15,
-          gestureName: "soundsDrag",
-          onStart: (ev) => {
-            setDragging(m.id);
-          },
-          onMove: (ev) => {
-            setDeltaX(ev.deltaX);
-            setDeltaY(ev.deltaY);
-          },
-          onEnd: (ev) => {
-            // setDragging(0);
-          },
-        });
-        gesture.enable();
-      }
-    });
+  scene?.sounds.slice(1).forEach((m) => {
+    const imageRef = document.querySelector(`#${m.name}`);
 
+    if (imageRef !== null) {
+      const gesture: Gesture = createGesture({
+        el: imageRef,
+        threshold: 15,
+        gestureName: "soundsDrag",
+        onStart: (ev) => {
+          setDragging(m.id);
+        },
+        onMove: (ev) => {
+          setDeltaX(ev.deltaX);
+          setDeltaY(ev.deltaY);
+        },
+        onEnd: (ev) => {
+          console.log(ev);
+          if (
+            ev.currentX >= 190 &&
+            ev.currentX <= 710 &&
+            ev.currentY >= 670 &&
+            ev.currentY <= 745
+          ) {
+            setRecorder([...recorder, { step: m.id, id: m.id, player: false }]);
+          }
+        },
+      });
+      gesture.enable();
+    }
+  });
+
+  useEffect(() => {
     if (scene && scene !== null) {
       var _howls: Howl[] = [];
       var _player: boolean[] = [];
@@ -166,13 +175,14 @@ function ViewScene() {
                   src={img(m.img)}
                   onClick={() => {
                     soundSelected(m.name);
-                    setRecorder([
-                      ...recorder,
-                      { step: m.id, id: m.id, player: false },
-                    ]);
                     player[m.id] ? howls[m.id].stop() : howls[m.id].play();
                     player[m.id] = !player[m.id];
                   }}
+                ></IonImg>
+
+                <IonImg
+                  className="smallImage"
+                  id={m.img}
                   style={
                     dragging === m.id
                       ? {
@@ -180,14 +190,27 @@ function ViewScene() {
                         }
                       : {}
                   }
+                  src={img(`${scene.fromName}${m.name}Small.png`)}
                 ></IonImg>
               </IonCol>
             ))}
           </IonRow>
-          <IonImg
-            onClick={playList}
-            src="/public/assets/images/escenas/aventuraBarco.png"
-          ></IonImg>
+
+          <IonRow
+            className="box"
+            style={{
+              backgroundImage: `url(${img(`${scene.bar}`)})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              backgroundSize: "contain",
+            }}
+          >
+            <IonImg
+              className="playButton"
+              onClick={() => (recorder[0] ? playList() : null)}
+              src={img(`${scene.playButton}`)}
+            ></IonImg>
+          </IonRow>
         </IonGrid>
       ) : (
         <div>Scene not found</div>
