@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, cloneElement } from "react";
 import { Scene, getScene } from "../data/scenes";
 import {
   IonPage,
@@ -23,13 +23,13 @@ function ViewScene() {
   const params = useParams<{ id: string }>();
   const [howls, setHowls] = useState<Howl[]>([]);
   const [player, setPlayer] = useState<boolean[]>([]);
-  const [deltaX, setDeltaX] = useState(0);
-  const [deltaY, setDeltaY] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
+  const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(0);
 
   const [recorder, setRecorder] = useState<
     {
-      step: number;
+      // step: number;
       id: number;
       player: boolean;
     }[]
@@ -66,9 +66,12 @@ function ViewScene() {
     }
   };
 
+  let windowWidth = window.innerWidth;
+  console.log(windowWidth);
+  let windowHeight = window.innerHeight;
+
   scene?.sounds.slice(1).forEach((m) => {
     const imageRef = document.querySelector(`#${m.name}`);
-
     if (imageRef !== null) {
       const gesture: Gesture = createGesture({
         el: imageRef,
@@ -78,24 +81,83 @@ function ViewScene() {
           setDragging(m.id);
         },
         onMove: (ev) => {
-          setDeltaX(ev.deltaX);
-          setDeltaY(ev.deltaY);
+          setCurrentX(ev.currentX);
+          setCurrentY(ev.currentY);
+          console.log(ev.currentX, ev.currentY);
         },
         onEnd: (ev) => {
-          console.log(ev);
+          setDragging(0);
           if (
-            ev.currentX >= 190 &&
-            ev.currentX <= 710 &&
-            ev.currentY >= 670 &&
-            ev.currentY <= 745
+            ev.currentX > 0.37 * windowWidth &&
+            ev.currentX <= 0.435 * windowWidth &&
+            ev.currentY > 0.89 * windowHeight &&
+            ev.currentY <= 0.96 * windowHeight
           ) {
-            setRecorder([...recorder, { step: m.id, id: m.id, player: false }]);
+            let _recorder = [...recorder];
+            _recorder[0] = {
+              player: false,
+              id: m.id,
+            };
+            setRecorder(_recorder);
+          } else if (
+            ev.currentX > 0.435 * windowWidth &&
+            ev.currentX <= 0.5 * windowWidth &&
+            ev.currentY > 0.89 * windowHeight &&
+            ev.currentY <= 0.96 * windowHeight
+          ) {
+            let _recorder = [...recorder];
+            _recorder[1] = {
+              player: false,
+              id: m.id,
+            };
+            setRecorder(_recorder);
+          } else if (
+            ev.currentX > 0.505 * windowWidth &&
+            ev.currentX <= 0.555 * windowWidth &&
+            ev.currentY > 0.89 * windowHeight &&
+            ev.currentY <= 0.96 * windowHeight
+          ) {
+            let _recorder = [...recorder];
+            _recorder[2] = {
+              player: false,
+              id: m.id,
+            };
+            setRecorder(_recorder);
+          } else if (
+            ev.currentX > 0.555 * windowWidth &&
+            ev.currentX <= 0.615 * windowWidth &&
+            ev.currentY > 0.89 * windowHeight &&
+            ev.currentY <= 0.96 * windowHeight
+          ) {
+            let _recorder = [...recorder];
+            _recorder[3] = {
+              player: false,
+              id: m.id,
+            };
+            setRecorder(_recorder);
+          } else if (
+            ev.currentX > 0.61 * windowWidth &&
+            ev.currentX <= 0.66 * windowWidth &&
+            ev.currentY > 0.89 * windowHeight &&
+            ev.currentY <= 0.96 * windowHeight
+          ) {
+            let _recorder = [...recorder];
+            _recorder[4] = {
+              player: false,
+              id: m.id,
+            };
+            setRecorder(_recorder);
           }
         },
       });
       gesture.enable();
     }
   });
+
+  useEffect(() => {
+    console.log(recorder);
+    return () => {};
+  }, [recorder]);
 
   useEffect(() => {
     if (scene && scene !== null) {
@@ -165,6 +227,30 @@ function ViewScene() {
       </IonButton>
 
       {scene ? (
+        scene.sounds.slice(1).map((m) => (
+          <IonImg
+            key={m.id}
+            className="smallImageDragged"
+            id={`${m.name}-small`}
+            style={
+              dragging === m.id
+                ? {
+                    // transform: `translate(${deltaX}px, ${deltaY}px)`,
+                    left: `${currentX - 30}px`,
+                    top: `${currentY - 30}px`,
+                    opacity: 1,
+                    zIndex: "2",
+                  }
+                : {}
+            }
+            src={img(`${scene.fromName}${m.name}Small.png`)}
+          ></IonImg>
+        ))
+      ) : (
+        <div></div>
+      )}
+
+      {scene ? (
         <IonGrid className="gridScene">
           <IonRow className="ion-justify-content-center ion-align-items-end">
             {scene.sounds.slice(1).map((m) => (
@@ -179,19 +265,6 @@ function ViewScene() {
                     player[m.id] = !player[m.id];
                   }}
                 ></IonImg>
-
-                <IonImg
-                  className="smallImage"
-                  id={m.img}
-                  style={
-                    dragging === m.id
-                      ? {
-                          transform: `translate(${deltaX}px, ${deltaY}px)`,
-                        }
-                      : {}
-                  }
-                  src={img(`${scene.fromName}${m.name}Small.png`)}
-                ></IonImg>
               </IonCol>
             ))}
           </IonRow>
@@ -205,6 +278,119 @@ function ViewScene() {
               backgroundSize: "contain",
             }}
           >
+            {recorder.map((step, k) =>
+              scene.sounds.slice(1).map((m, index) => (
+                <IonImg
+                  key={m.id}
+                  className="smallImageSelected"
+                  id={`${k}-${m.name}-small`}
+                  style={
+                    // recorder[0].id === m.id
+                    recorder[k]?.id === m.id
+                      ? {
+                          opacity: 1,
+                          left: `${200 + 66 * k}px`,
+                          // left: "0px",
+                        }
+                      : {}
+                  }
+                  src={img(`${scene.fromName}${m.name}Small.png`)}
+                ></IonImg>
+              ))
+            )}
+
+            {/* {scene.sounds.slice(1).map((m, index) => (
+              <IonImg
+                key={m.id}
+                className="smallImageSelected"
+                id={`0-${m.name}-small`}
+                style={
+                  // recorder[0].id === m.id
+                  recorder[0]?.id === m.id
+                    ? {
+                        opacity: 1,
+                        left: `${32 * m.id}px`,
+                        // left: "0px",
+                      }
+                    : {}
+                }
+                src={img(`${scene.fromName}${m.name}Small.png`)}
+              ></IonImg>
+            ))}
+
+            {scene.sounds.slice(1).map((m, index) => (
+              <IonImg
+                key={m.id}
+                className="smallImageSelected"
+                id={`1-${m.name}-small`}
+                style={
+                  // recorder[0].id === m.id
+                  recorder[1]?.id === m.id
+                    ? {
+                        opacity: 1,
+                        left: `${128 + 64 }px`,
+                        // left: "0px",
+                      }
+                    : {}
+                }
+                src={img(`${scene.fromName}${m.name}Small.png`)}
+              ></IonImg>
+            ))} */}
+
+            {/* {scene.sounds.slice(1).map((m, index) => (
+              <IonImg
+                key={m.id}
+                className="smallImageSelected"
+                id={`1-${m.name}-small`}
+                style={
+                  recorder[1].id === m.id
+                    ? {
+                        // zIndex: "1",
+                        opacity: 1,
+                        // top: 300px;
+                      }
+                    : {}
+                }
+                src={img(`${scene.fromName}${m.name}Small.png`)}
+              ></IonImg>
+            ))}
+
+            {scene.sounds.slice(1).map((m, index) => (
+              <IonImg
+                key={m.id}
+                className="smallImageSelected"
+                id={`2-${m.name}-small`}
+                style={
+                  recorder[2].id === m.id
+                    ? {
+                        // zIndex: "1",
+                        opacity: 1,
+                        // top: 300px;
+                      }
+                    : {}
+                }
+                src={img(`${scene.fromName}${m.name}Small.png`)}
+              ></IonImg>
+            ))}
+
+            {scene.sounds.slice(1).map((m, index) => (
+              <IonImg
+                key={m.id}
+                className="smallImageSelected"
+                id={`3-${m.name}-small`}
+                style={
+                  recorder[3].id === m.id
+                    ? {
+                        // zIndex: "1",
+                        opacity: 1,
+                        // top: 300px;
+                      }
+                    : {}
+                }
+                src={img(`${scene.fromName}${m.name}Small.png`)}
+              ></IonImg>
+            ))} */}
+
             <IonImg
               className="playButton"
               onClick={() => (recorder[0] ? playList() : null)}

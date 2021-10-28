@@ -48,7 +48,7 @@ const Scenes: Scene[] = [
     ],
   },
   {
-    fromName: "MAGIA",
+    fromName: "magia",
     id: 1,
     avatar: "magia.png",
     background: "magia.png",
@@ -80,7 +80,7 @@ const Scenes: Scene[] = [
     ],
   },
   {
-    fromName: "AVENTURA",
+    fromName: "aventura",
     id: 2,
     avatar: "aventura.png",
     background: "aventura.png",
@@ -98,7 +98,7 @@ const Scenes: Scene[] = [
       { id: 2, name: "Agua", src: "aventuraAgua.mp3", img: "aventuraAgua.png" },
       {
         id: 3,
-        name: "Explosión",
+        name: "Explosion",
         src: "aventuraExplosion.mp3",
         img: "aventuraExplosion.png",
       },

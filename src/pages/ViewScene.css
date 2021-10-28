@@ -65,15 +65,27 @@ ion-col {
   height: 80px;
   position: absolute;
   bottom: 3vh;
-  /*  border: solid 3px rgb(241, 0, 0);
-} */
+  /* border: solid 3px rgb(241, 0, 0); */
 }
 
 .smallImage {
   position: absolute;
-  top: 50%;
+  top: 25%;
+  z-index: -1;
 }
 
+.smallImageDragged {
+  position: absolute;
+  /* top: 25%; */
+  opacity: 0;
+}
+
+.smallImageSelected {
+  position: absolute;
+  top: 1.5vh;
+  /* left: 20vw; */
+  opacity: 0;
+}
 .playButton {
   position: absolute;
   right: 0;
