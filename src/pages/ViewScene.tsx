@@ -1,4 +1,4 @@
-import { useState, useEffect, cloneElement } from "react";
+import { useState, useEffect } from "react";
 import { Scene, getScene } from "../data/scenes";
 import {
   IonPage,
