@@ -30,8 +30,8 @@ const SceneListItem: React.FC<SceneListItemProps> = ({ scene }) => {
         fill: "none",
         fromTo: {
           property: "transform",
-          fromValue: "translateY(0) translateX(0) rotate(0) scale(1)",
-          toValue: `translateY(0) translateX(0) rotate(360deg) scale(4)`,
+          fromValue: "  scale(1)",
+          toValue: ` scale(1.5)`,
         },
 
         easing: "ease-out",

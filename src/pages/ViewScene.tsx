@@ -15,6 +15,7 @@ import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
 import "./ViewScene.css";
 
+import { useHistory } from "react-router";
 import { audio, background } from "../util";
 import { img } from "../util";
 import { GESTURE_CONTROLLER } from "@ionic/core/dist/types/utils/gesture";
@@ -30,11 +31,11 @@ function ViewScene() {
 
   const [recorder, setRecorder] = useState<
     {
-      // step: number;
       id: number;
       player: boolean;
     }[]
   >([]);
+  const history = useHistory();
 
   useIonViewWillEnter(() => {
     Howler.autoUnlock = false;
@@ -47,6 +48,12 @@ function ViewScene() {
     const soundButton = document.querySelector(`#${id}`);
     soundButton?.classList.add("filter");
     setTimeout(() => soundButton?.classList.remove("filter"), 200);
+  }
+
+  function playSelected() {
+    const playButton = document.querySelector("#ButtonPlay");
+    playButton?.classList.add("filter");
+    setTimeout(() => playButton?.classList.remove("filter"), 200);
   }
 
   const playList = () => {
@@ -221,7 +228,14 @@ function ViewScene() {
         backgroundSize: "cover",
       }}
     >
-      <IonButton className="backButton" fill="default" href="/home">
+      <IonButton
+        className="backButton"
+        fill="default"
+        onClick={() => {
+          history.push("/");
+        }}
+        routerDirection="back"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="ionicon"
@@ -413,8 +427,14 @@ function ViewScene() {
             ))} */}
 
             <IonImg
+              id="ButtonPlay"
               className="playButton"
-              onClick={() => (recorder[0] ? playList() : null)}
+              onClick={() => {
+                if (recorder[0]) {
+                  playList();
+                  playSelected();
+                }
+              }}
               src={img(`${scene.playButton}`)}
             ></IonImg>
           </IonRow>

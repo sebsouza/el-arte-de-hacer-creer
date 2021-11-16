@@ -41,8 +41,10 @@
 
 .backButton {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 1rem;
+  left: 1rem;
+  height: 5.5rem;
+  text-align: center;
 }
 
 .filter {
@@ -52,10 +54,6 @@
 
 ion-col {
   --ion-grid-columns: 3;
-}
-
-.backButton {
-  height: 5.5rem;
 }
 
 .box {
