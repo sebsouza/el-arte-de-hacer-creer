@@ -17,6 +17,7 @@ import "./ViewScene.css";
 
 import { audio, background } from "../util";
 import { img } from "../util";
+import { GESTURE_CONTROLLER } from "@ionic/core/dist/types/utils/gesture";
 
 function ViewScene() {
   const [scene, setScene] = useState<Scene>();
@@ -71,6 +72,26 @@ function ViewScene() {
   let windowHeight = window.innerHeight;
 
   scene?.sounds.slice(1).forEach((m) => {
+    for (let k = 0; k < 5; k++) {
+      const smallImageRef = document.querySelector(`${k}-${m.name}-small`);
+      if (smallImageRef !== null) {
+        const gestureRemove: Gesture = createGesture({
+          el: smallImageRef,
+          threshold: 15,
+          gestureName: "soundsRemoving",
+          onStart: (ev) => {
+            console.log(ev);
+          },
+          onMove: (ev) => {
+            console.log(ev);
+          },
+          onEnd: (ev) => {
+            console.log(ev);
+          },
+        });
+        gestureRemove.enable();
+      }
+    }
     const imageRef = document.querySelector(`#${m.name}`);
     if (imageRef !== null) {
       const gesture: Gesture = createGesture({
@@ -83,7 +104,7 @@ function ViewScene() {
         onMove: (ev) => {
           setCurrentX(ev.currentX);
           setCurrentY(ev.currentY);
-          console.log(ev.currentX, ev.currentY);
+          // console.log(ev.currentX, ev.currentY);
         },
         onEnd: (ev) => {
           setDragging(0);
@@ -154,10 +175,10 @@ function ViewScene() {
     }
   });
 
-  useEffect(() => {
-    console.log(recorder);
-    return () => {};
-  }, [recorder]);
+  // useEffect(() => {
+  //   console.log(recorder);
+  //   return () => {};
+  // }, [recorder]);
 
   useEffect(() => {
     if (scene && scene !== null) {
