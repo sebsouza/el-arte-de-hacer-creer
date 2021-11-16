@@ -8,17 +8,34 @@ import {
   useIonViewWillEnter,
   IonRow,
   IonGrid,
+  useIonViewWillLeave,
 } from "@ionic/react";
 import "./Home.css";
+import { Howl } from "howler";
+import { audio } from "../util";
 
 import { background } from "../util";
 
 const Home: React.FC = () => {
   const [Scenes, setScenes] = useState<Scene[]>([]);
 
+  var _howl: Howl;
+
+  _howl = new Howl({
+    src: [audio("portada.mp3")],
+    volume: 1,
+    loop: true,
+  });
+
   useIonViewWillEnter(() => {
     const msgs = getScenes();
     setScenes(msgs);
+
+    _howl.play();
+  });
+
+  useIonViewWillLeave(() => {
+    _howl.stop();
   });
 
   return (
