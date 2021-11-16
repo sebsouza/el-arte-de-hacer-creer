@@ -89,7 +89,7 @@ function ViewScene() {
           setDragging(0);
           if (
             ev.currentX > 0.37 * windowWidth &&
-            ev.currentX <= 0.435 * windowWidth &&
+            ev.currentX <= 0.44 * windowWidth &&
             ev.currentY > 0.89 * windowHeight &&
             ev.currentY <= 0.96 * windowHeight
           ) {
@@ -100,8 +100,8 @@ function ViewScene() {
             };
             setRecorder(_recorder);
           } else if (
-            ev.currentX > 0.435 * windowWidth &&
-            ev.currentX <= 0.5 * windowWidth &&
+            ev.currentX > 0.44 * windowWidth &&
+            ev.currentX <= 0.55 * windowWidth &&
             ev.currentY > 0.89 * windowHeight &&
             ev.currentY <= 0.96 * windowHeight
           ) {
@@ -112,8 +112,8 @@ function ViewScene() {
             };
             setRecorder(_recorder);
           } else if (
-            ev.currentX > 0.505 * windowWidth &&
-            ev.currentX <= 0.555 * windowWidth &&
+            ev.currentX > 0.51 * windowWidth &&
+            ev.currentX <= 0.56 * windowWidth &&
             ev.currentY > 0.89 * windowHeight &&
             ev.currentY <= 0.96 * windowHeight
           ) {
@@ -124,8 +124,8 @@ function ViewScene() {
             };
             setRecorder(_recorder);
           } else if (
-            ev.currentX > 0.555 * windowWidth &&
-            ev.currentX <= 0.615 * windowWidth &&
+            ev.currentX > 0.56 * windowWidth &&
+            ev.currentX <= 0.62 * windowWidth &&
             ev.currentY > 0.89 * windowHeight &&
             ev.currentY <= 0.96 * windowHeight
           ) {
@@ -136,8 +136,8 @@ function ViewScene() {
             };
             setRecorder(_recorder);
           } else if (
-            ev.currentX > 0.61 * windowWidth &&
-            ev.currentX <= 0.66 * windowWidth &&
+            ev.currentX > 0.62 * windowWidth &&
+            ev.currentX <= 0.7 * windowWidth &&
             ev.currentY > 0.89 * windowHeight &&
             ev.currentY <= 0.96 * windowHeight
           ) {
