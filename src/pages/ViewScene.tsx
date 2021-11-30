@@ -58,9 +58,11 @@ function ViewScene() {
 
   const playList = () => {
     const list: Howl[] = [];
-    recorder.forEach((sound) => {
-      howls[sound.id].stop();
-      list.push(howls[sound.id]);
+    recorder.forEach((step) => {
+      if (step.player) {
+        howls[step.id].stop();
+        list.push(howls[step.id]);
+      }
     });
 
     list[0].play();
@@ -75,30 +77,29 @@ function ViewScene() {
   };
 
   let windowWidth = window.innerWidth;
-  console.log(windowWidth);
   let windowHeight = window.innerHeight;
 
   scene?.sounds.slice(1).forEach((m) => {
-    for (let k = 0; k < 5; k++) {
-      const smallImageRef = document.querySelector(`${k}-${m.name}-small`);
-      if (smallImageRef !== null) {
-        const gestureRemove: Gesture = createGesture({
-          el: smallImageRef,
-          threshold: 15,
-          gestureName: "soundsRemoving",
-          onStart: (ev) => {
-            console.log(ev);
-          },
-          onMove: (ev) => {
-            console.log(ev);
-          },
-          onEnd: (ev) => {
-            console.log(ev);
-          },
-        });
-        gestureRemove.enable();
-      }
-    }
+    // for (let k = 0; k < 5; k++) {
+    //   const smallImageRef = document.querySelector(`#${k}-${m.name}-small`);
+    //   if (smallImageRef !== null) {
+    //     const gestureRemove: Gesture = createGesture({
+    //       el: smallImageRef,
+    //       threshold: 15,
+    //       gestureName: "soundsRemoving",
+    //       onStart: (ev) => {
+    //         console.log(ev);
+    //       },
+    //       onMove: (ev) => {
+    //         console.log(ev);
+    //       },
+    //       onEnd: (ev) => {
+    //         console.log(ev);
+    //       },
+    //     });
+    //     gestureRemove.enable();
+    //   }
+    // }
     const imageRef = document.querySelector(`#${m.name}`);
     if (imageRef !== null) {
       const gesture: Gesture = createGesture({
@@ -111,7 +112,6 @@ function ViewScene() {
         onMove: (ev) => {
           setCurrentX(ev.currentX);
           setCurrentY(ev.currentY);
-          // console.log(ev.currentX, ev.currentY);
         },
         onEnd: (ev) => {
           setDragging(0);
@@ -123,31 +123,31 @@ function ViewScene() {
           ) {
             let _recorder = [...recorder];
             _recorder[0] = {
-              player: false,
+              player: true,
               id: m.id,
             };
             setRecorder(_recorder);
           } else if (
             ev.currentX > 0.44 * windowWidth &&
-            ev.currentX <= 0.55 * windowWidth &&
+            ev.currentX <= 0.49 * windowWidth &&
             ev.currentY > 0.89 * windowHeight &&
             ev.currentY <= 0.96 * windowHeight
           ) {
             let _recorder = [...recorder];
             _recorder[1] = {
-              player: false,
+              player: true,
               id: m.id,
             };
             setRecorder(_recorder);
           } else if (
-            ev.currentX > 0.51 * windowWidth &&
+            ev.currentX > 0.5 * windowWidth &&
             ev.currentX <= 0.56 * windowWidth &&
             ev.currentY > 0.89 * windowHeight &&
             ev.currentY <= 0.96 * windowHeight
           ) {
             let _recorder = [...recorder];
             _recorder[2] = {
-              player: false,
+              player: true,
               id: m.id,
             };
             setRecorder(_recorder);
@@ -159,19 +159,19 @@ function ViewScene() {
           ) {
             let _recorder = [...recorder];
             _recorder[3] = {
-              player: false,
+              player: true,
               id: m.id,
             };
             setRecorder(_recorder);
           } else if (
             ev.currentX > 0.62 * windowWidth &&
-            ev.currentX <= 0.7 * windowWidth &&
+            ev.currentX <= 0.68 * windowWidth &&
             ev.currentY > 0.89 * windowHeight &&
             ev.currentY <= 0.96 * windowHeight
           ) {
             let _recorder = [...recorder];
             _recorder[4] = {
-              player: false,
+              player: true,
               id: m.id,
             };
             setRecorder(_recorder);
@@ -182,10 +182,52 @@ function ViewScene() {
     }
   });
 
-  // useEffect(() => {
-  //   console.log(recorder);
-  //   return () => {};
-  // }, [recorder]);
+  useEffect(() => {
+    for (let k = 0; k < 5; k++) {
+      if (recorder[k] !== undefined) {
+        scene?.sounds.slice(1).forEach((m) => {
+          if (recorder[k].id === m.id) {
+            const smallImageRef = document.getElementById(`${k}-${m.id}-small`);
+
+            if (smallImageRef !== null) {
+              const gestureRemove: Gesture = createGesture({
+                el: smallImageRef,
+                threshold: 15,
+                gestureName: "soundsRemoving",
+                onStart: (ev) => {
+                  setDragging(m.id);
+                },
+                onMove: (ev) => {
+                  setCurrentX(ev.currentX);
+                  setCurrentY(ev.currentY);
+                },
+                onEnd: (ev) => {
+                  setDragging(0);
+
+                  if (
+                    // 1
+                    // ev.currentX > 0.37 * windowWidth &&
+                    // ev.currentX <= 0.7 * windowWidth &&
+                    ev.currentY < 0.89 * windowHeight ||
+                    ev.currentY > 0.96 * windowHeight
+                  ) {
+                    let _recorder = [...recorder];
+                    _recorder[k] = {
+                      player: false,
+                      id: m.id,
+                    };
+                    setRecorder(_recorder);
+                    // console.log(_recorder)
+                  }
+                },
+              });
+              gestureRemove.enable();
+            }
+          }
+        });
+      }
+    }
+  }, [recorder]);
 
   useEffect(() => {
     if (scene && scene !== null) {
@@ -318,14 +360,14 @@ function ViewScene() {
                 <IonImg
                   key={m.id}
                   className="smallImageSelected"
-                  id={`${k}-${m.name}-small`}
+                  id={`${k}-${m.id}-small`}
                   style={
                     // recorder[0].id === m.id
-                    recorder[k]?.id === m.id
+                    recorder[k]?.id === m.id && recorder[k]?.player === true
                       ? {
                           opacity: 1,
-                          left: `${200 + 66 * k}px`,
-                          // left: "0px",
+                          // left: `${200 + 66 * k}px`,
+                          left: `${18 + 7 * k}vw`,
                         }
                       : {}
                   }
