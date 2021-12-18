@@ -13,8 +13,9 @@ const HomePage: React.FC = () => {
             backgroundImage: `url(${background("portada.png")})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            backgroundSize: "cover",
+            backgroundSize: "contain",
             height: "100%",
+            backgroundColor: "#000",
           }}
           onClick={() => {
             history.push("/home");
