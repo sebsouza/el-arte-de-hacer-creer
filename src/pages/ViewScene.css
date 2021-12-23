@@ -34,11 +34,18 @@
 }
 
 .gridScene {
-  margin-top: 10vh;
-  height: auto;
+  margin-top: 8vh;
+  /* height: auto; */
   justify-content: center;
   align-items: center;
-  display: flex;
+  /* display: flex; */
+}
+
+.header {
+  margin-bottom: 6vh;
+}
+.image-header {
+  height: 16vh;
 }
 
 .backButton {
@@ -60,11 +67,9 @@ ion-col {
 }
 
 .box {
-  /* margin-top: 4vh; */
-  width: 60vw;
-  height: 10vh;
-  position: absolute;
-  bottom: 3vh;
+  margin: 0 10%;
+  width: auto;
+  height: 8vh;
   /* border: solid 3px rgb(241, 0, 0); */
 }
 
@@ -88,7 +93,7 @@ ion-col {
 }
 .playButton {
   position: absolute;
-  right: -1vw;
+  left: 80%;
   margin-right: 1vw;
   height: 10vh;
 }

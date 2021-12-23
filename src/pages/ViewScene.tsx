@@ -95,67 +95,83 @@ function ViewScene() {
         },
         onEnd: (ev) => {
           setDragging(0);
-          if (
-            ev.currentX > 0.37 * windowWidth &&
-            ev.currentX <= 0.44 * windowWidth &&
-            ev.currentY > 0.89 * windowHeight &&
-            ev.currentY <= 0.96 * windowHeight
-          ) {
-            let _recorder = [...recorder];
-            _recorder[0] = {
-              player: true,
-              id: m.id,
-            };
-            setRecorder(_recorder);
-          } else if (
-            ev.currentX > 0.44 * windowWidth &&
-            ev.currentX <= 0.49 * windowWidth &&
-            ev.currentY > 0.89 * windowHeight &&
-            ev.currentY <= 0.96 * windowHeight
-          ) {
-            let _recorder = [...recorder];
-            _recorder[1] = {
-              player: true,
-              id: m.id,
-            };
-            setRecorder(_recorder);
-          } else if (
-            ev.currentX > 0.5 * windowWidth &&
-            ev.currentX <= 0.56 * windowWidth &&
-            ev.currentY > 0.89 * windowHeight &&
-            ev.currentY <= 0.96 * windowHeight
-          ) {
-            let _recorder = [...recorder];
-            _recorder[2] = {
-              player: true,
-              id: m.id,
-            };
-            setRecorder(_recorder);
-          } else if (
-            ev.currentX > 0.56 * windowWidth &&
-            ev.currentX <= 0.65 * windowWidth &&
-            ev.currentY > 0.89 * windowHeight &&
-            ev.currentY <= 0.96 * windowHeight
-          ) {
-            let _recorder = [...recorder];
-            _recorder[3] = {
-              player: true,
-              id: m.id,
-            };
-            setRecorder(_recorder);
-          } else if (
-            ev.currentX > 0.65 * windowWidth &&
-            ev.currentX <= 0.75 * windowWidth &&
-            ev.currentY > 0.89 * windowHeight &&
-            ev.currentY <= 0.96 * windowHeight
-          ) {
-            let _recorder = [...recorder];
-            _recorder[4] = {
-              player: true,
-              id: m.id,
-            };
-            setRecorder(_recorder);
+
+          for (let i = 0; i < 5; i++) {
+            if (
+              ev.currentX > (0.335 + i * 0.09) * windowWidth &&
+              ev.currentX <= (0.425 + i * 0.09) * windowWidth &&
+              ev.currentY > 0.8 * windowHeight &&
+              ev.currentY <= windowHeight
+            ) {
+              let _recorder = [...recorder];
+              _recorder[i] = {
+                player: true,
+                id: m.id,
+              };
+              setRecorder(_recorder);
+            }
           }
+          // if (
+          //   ev.currentX > 0.37 * windowWidth &&
+          //   ev.currentX <= 0.44 * windowWidth &&
+          //   ev.currentY > 0.89 * windowHeight &&
+          //   ev.currentY <= 0.96 * windowHeight
+          // ) {
+          //   let _recorder = [...recorder];
+          //   _recorder[0] = {
+          //     player: true,
+          //     id: m.id,
+          //   };
+          //   setRecorder(_recorder);
+          // } else if (
+          //   ev.currentX > 0.44 * windowWidth &&
+          //   ev.currentX <= 0.49 * windowWidth &&
+          //   ev.currentY > 0.89 * windowHeight &&
+          //   ev.currentY <= 0.96 * windowHeight
+          // ) {
+          //   let _recorder = [...recorder];
+          //   _recorder[1] = {
+          //     player: true,
+          //     id: m.id,
+          //   };
+          //   setRecorder(_recorder);
+          // } else if (
+          //   ev.currentX > 0.5 * windowWidth &&
+          //   ev.currentX <= 0.56 * windowWidth &&
+          //   ev.currentY > 0.89 * windowHeight &&
+          //   ev.currentY <= 0.96 * windowHeight
+          // ) {
+          //   let _recorder = [...recorder];
+          //   _recorder[2] = {
+          //     player: true,
+          //     id: m.id,
+          //   };
+          //   setRecorder(_recorder);
+          // } else if (
+          //   ev.currentX > 0.56 * windowWidth &&
+          //   ev.currentX <= 0.65 * windowWidth &&
+          //   ev.currentY > 0.89 * windowHeight &&
+          //   ev.currentY <= 0.96 * windowHeight
+          // ) {
+          //   let _recorder = [...recorder];
+          //   _recorder[3] = {
+          //     player: true,
+          //     id: m.id,
+          //   };
+          //   setRecorder(_recorder);
+          // } else if (
+          //   ev.currentX > 0.65 * windowWidth &&
+          //   ev.currentX <= 0.75 * windowWidth &&
+          //   ev.currentY > 0.89 * windowHeight &&
+          //   ev.currentY <= 0.96 * windowHeight
+          // ) {
+          //   let _recorder = [...recorder];
+          //   _recorder[4] = {
+          //     player: true,
+          //     id: m.id,
+          //   };
+          //   setRecorder(_recorder);
+          // }
         },
       });
       gesture.enable();
@@ -311,7 +327,15 @@ function ViewScene() {
 
       {scene ? (
         <IonGrid className="gridScene">
-          <IonRow className="ion-justify-content-center ion-align-items-end">
+          <IonRow className="ion-justify-content-center header">
+            <IonCol>
+              <IonImg
+                className="image-header"
+                src={img(`${scene.fromName}Header.png`)}
+              ></IonImg>
+            </IonCol>
+          </IonRow>
+          <IonRow className="ion-justify-content-center header">
             {scene.sounds.slice(1).map((m) => (
               <IonCol key={m.id} size="1">
                 <IonImg
@@ -329,8 +353,9 @@ function ViewScene() {
           </IonRow>
 
           <IonRow
-            className="box"
+            className="ion-justify-content-center box"
             style={{
+              // alignContent: "center",
               backgroundImage: `url(${img(`${scene.bar}`)})`,
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
@@ -349,7 +374,7 @@ function ViewScene() {
                       ? {
                           opacity: 1,
                           // left: `${200 + 66 * k}px`,
-                          left: `${18 + 7 * k}vw`,
+                          left: `${38 + 9 * k}vw`,
                         }
                       : {}
                   }
