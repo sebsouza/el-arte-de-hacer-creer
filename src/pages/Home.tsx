@@ -9,11 +9,12 @@ import {
   IonRow,
   IonGrid,
   useIonViewWillLeave,
+  IonImg,
 } from "@ionic/react";
 import "./Home.css";
 
 import { Howl } from "howler";
-import { audio } from "../util";
+import { audio, img } from "../util";
 
 import { background } from "../util";
 
@@ -41,17 +42,26 @@ const Home: React.FC = () => {
 
   return (
     <IonPage id="home-page">
-      <IonContent>
+      <IonContent style={{ alignItems: "center", display: "flex" }}>
         <IonGrid
           style={{
-            backgroundImage: `url(${background("home.jpg")})`,
+            backgroundImage: `url(${background("home.png")})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
           className="grid"
         >
-          <IonRow>
+          <IonRow className="ion-justify-content-center header-home">
+            <IonCol>
+              <IonImg
+                className="image-header"
+                src={img(`homeHeader.png`)}
+              ></IonImg>
+            </IonCol>
+          </IonRow>
+
+          <IonRow className="row">
             {Scenes.map((m) => (
               <IonCol className="col" key={m.id}>
                 <SceneListItem key={m.id} scene={m} />

@@ -1,14 +1,23 @@
 .grid {
   height: 100%;
-  width: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.header-home {
+  margin-top: 12vh;
+}
+.image-header {
+  height: 16vh;
+}
+
+.row {
+  padding: 4%;
+  width: 100%;
+}
+
 .col {
-  margin: 0 3rem;
-  width: 15%;
+  width: auto;
   justify-content: center;
   align-items: center;
 }

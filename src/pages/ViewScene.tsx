@@ -95,11 +95,11 @@ function ViewScene() {
         },
         onEnd: (ev) => {
           setDragging(0);
-
+          console.log(ev.currentX / windowWidth, ev.currentY / windowHeight);
           for (let i = 0; i < 5; i++) {
             if (
-              ev.currentX > (0.335 + i * 0.09) * windowWidth &&
-              ev.currentX <= (0.425 + i * 0.09) * windowWidth &&
+              ev.currentX > (0.27 + i * 0.1) * windowWidth &&
+              ev.currentX <= (0.37 + i * 0.1) * windowWidth &&
               ev.currentY > 0.8 * windowHeight &&
               ev.currentY <= windowHeight
             ) {
@@ -108,70 +108,10 @@ function ViewScene() {
                 player: true,
                 id: m.id,
               };
+              console.log(_recorder);
               setRecorder(_recorder);
             }
           }
-          // if (
-          //   ev.currentX > 0.37 * windowWidth &&
-          //   ev.currentX <= 0.44 * windowWidth &&
-          //   ev.currentY > 0.89 * windowHeight &&
-          //   ev.currentY <= 0.96 * windowHeight
-          // ) {
-          //   let _recorder = [...recorder];
-          //   _recorder[0] = {
-          //     player: true,
-          //     id: m.id,
-          //   };
-          //   setRecorder(_recorder);
-          // } else if (
-          //   ev.currentX > 0.44 * windowWidth &&
-          //   ev.currentX <= 0.49 * windowWidth &&
-          //   ev.currentY > 0.89 * windowHeight &&
-          //   ev.currentY <= 0.96 * windowHeight
-          // ) {
-          //   let _recorder = [...recorder];
-          //   _recorder[1] = {
-          //     player: true,
-          //     id: m.id,
-          //   };
-          //   setRecorder(_recorder);
-          // } else if (
-          //   ev.currentX > 0.5 * windowWidth &&
-          //   ev.currentX <= 0.56 * windowWidth &&
-          //   ev.currentY > 0.89 * windowHeight &&
-          //   ev.currentY <= 0.96 * windowHeight
-          // ) {
-          //   let _recorder = [...recorder];
-          //   _recorder[2] = {
-          //     player: true,
-          //     id: m.id,
-          //   };
-          //   setRecorder(_recorder);
-          // } else if (
-          //   ev.currentX > 0.56 * windowWidth &&
-          //   ev.currentX <= 0.65 * windowWidth &&
-          //   ev.currentY > 0.89 * windowHeight &&
-          //   ev.currentY <= 0.96 * windowHeight
-          // ) {
-          //   let _recorder = [...recorder];
-          //   _recorder[3] = {
-          //     player: true,
-          //     id: m.id,
-          //   };
-          //   setRecorder(_recorder);
-          // } else if (
-          //   ev.currentX > 0.65 * windowWidth &&
-          //   ev.currentX <= 0.75 * windowWidth &&
-          //   ev.currentY > 0.89 * windowHeight &&
-          //   ev.currentY <= 0.96 * windowHeight
-          // ) {
-          //   let _recorder = [...recorder];
-          //   _recorder[4] = {
-          //     player: true,
-          //     id: m.id,
-          //   };
-          //   setRecorder(_recorder);
-          // }
         },
       });
       gesture.enable();
@@ -201,9 +141,6 @@ function ViewScene() {
                   setDragging(0);
 
                   if (
-                    // 1
-                    // ev.currentX > 0.37 * windowWidth &&
-                    // ev.currentX <= 0.7 * windowWidth &&
                     ev.currentY < 0.89 * windowHeight ||
                     ev.currentY > 0.96 * windowHeight
                   ) {
@@ -213,7 +150,6 @@ function ViewScene() {
                       id: m.id,
                     };
                     setRecorder(_recorder);
-                    // console.log(_recorder)
                   }
                 },
               });
@@ -280,7 +216,7 @@ function ViewScene() {
           xmlns="http://www.w3.org/2000/svg"
           className="ionicon"
           viewBox="0 0 512 512"
-          width="70"
+          width="100"
         >
           <title>Arrow Back Circle</title>
           <path
@@ -355,45 +291,60 @@ function ViewScene() {
           <IonRow
             className="ion-justify-content-center box"
             style={{
-              // alignContent: "center",
-              backgroundImage: `url(${img(`${scene.bar}`)})`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              backgroundSize: "contain",
+              alignContent: "center",
             }}
           >
-            {recorder.map((step, k) =>
-              scene.sounds.slice(1).map((m, index) => (
-                <IonImg
-                  key={m.id}
-                  className="smallImageSelected"
-                  id={`${k}-${m.id}-small`}
-                  style={
-                    // recorder[0].id === m.id
-                    recorder[k]?.id === m.id && recorder[k]?.player === true
-                      ? {
-                          opacity: 1,
-                          // left: `${200 + 66 * k}px`,
-                          left: `${38 + 9 * k}vw`,
-                        }
-                      : {}
-                  }
-                  src={img(`${scene.fromName}${m.name}Small.png`)}
-                ></IonImg>
-              ))
-            )}
-
-            <IonImg
-              id="ButtonPlay"
-              className="playButton"
-              onClick={() => {
-                if (recorder[0]) {
-                  playList();
-                  playSelected();
-                }
+            <IonCol
+              style={{
+                left: "-16%",
               }}
-              src={img(`${scene.playButton}`)}
-            ></IonImg>
+            >
+              <IonImg
+                style={{
+                  height: "8vh",
+                }}
+                src={img(`${scene.bar}`)}
+              ></IonImg>
+            </IonCol>
+            <IonCol>
+              {recorder.map((step, k) =>
+                scene.sounds.slice(1).map((m, index) => (
+                  <IonImg
+                    key={m.id}
+                    className="smallImageSelected"
+                    id={`${k}-${m.id}-small`}
+                    style={
+                      // recorder[0].id === m.id
+                      recorder[k]?.id === m.id && recorder[k]?.player === true
+                        ? {
+                            opacity: 1,
+                            // left: `${200 + 66 * k}px`,
+                            left: `${-18 + 10 * k}vw`,
+                          }
+                        : {}
+                    }
+                    src={img(`${scene.fromName}${m.name}Small.png`)}
+                  ></IonImg>
+                ))
+              )}
+            </IonCol>
+            <IonCol
+              style={{
+                right: "-16%",
+              }}
+            >
+              <IonImg
+                id="ButtonPlay"
+                className="playButton"
+                onClick={() => {
+                  if (recorder[0]) {
+                    playList();
+                    playSelected();
+                  }
+                }}
+                src={img(`${scene.playButton}`)}
+              ></IonImg>
+            </IonCol>
           </IonRow>
         </IonGrid>
       ) : (

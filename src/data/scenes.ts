@@ -17,7 +17,7 @@ const Scenes: Scene[] = [
     background: "misterio.png",
     primaryColor: "rgb(199,94,131)",
     playButton: "misterioPlay.png",
-    bar: "misterioBarra.png",
+    bar: "misterioBarraCartel.png",
     sounds: [
       { id: 0, name: "Misterio", src: "misterio0.mp3", img: "" },
       {
@@ -59,7 +59,7 @@ const Scenes: Scene[] = [
     background: "magia.png",
     primaryColor: "rgb(0,96,136)",
     playButton: "magiaPlay.png",
-    bar: "magiaBarra.png",
+    bar: "magiaBarraCartel.png",
     sounds: [
       { id: 0, name: "Magia", src: "magia0.mp3", img: "" },
       {
@@ -96,7 +96,7 @@ const Scenes: Scene[] = [
     background: "aventura.png",
     primaryColor: "rgb(0,97,134)",
     playButton: "aventuraPlay.png",
-    bar: "aventuraBarra.png",
+    bar: "aventuraBarraCartel.png",
     sounds: [
       { id: 0, name: "Aventura", src: "aventura0.mp3", img: "" },
       {
