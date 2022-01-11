@@ -318,6 +318,7 @@ function ViewScene() {
             className="ion-justify-content-center box"
             style={{
               alignContent: "center",
+              justifyContent: "center",
             }}
           >
             <IonCol
@@ -345,7 +346,7 @@ function ViewScene() {
                         ? {
                             opacity: 1,
                             // left: `${200 + 66 * k}px`,
-                            left: `${-18 + 10 * k}vw`,
+                            left: `${-14 + 10 * k}vw`,
                             zIndex: 100,
                           }
                         : {}

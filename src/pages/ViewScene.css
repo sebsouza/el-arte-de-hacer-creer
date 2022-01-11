@@ -90,7 +90,7 @@ ion-col {
 .smallImageSelected {
   position: absolute;
   height: 8vh;
-  width: 100%;
+  width: 12vw;
   /* margin-top: 2vh; */
   opacity: 0;
 }
