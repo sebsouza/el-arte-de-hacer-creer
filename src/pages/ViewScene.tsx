@@ -24,6 +24,7 @@ function ViewScene() {
   const [scene, setScene] = useState<Scene>();
   const params = useParams<{ id: string }>();
   const [howls, setHowls] = useState<Howl[]>([]);
+  const [list, setList] = useState<Howl[]>([]);
   const [player, setPlayer] = useState<boolean[]>([]);
   const [currentX, setCurrentX] = useState(0);
   const [currentY, setCurrentY] = useState(0);
@@ -34,7 +35,28 @@ function ViewScene() {
       id: number;
       player: boolean;
     }[]
-  >([]);
+  >([
+    {
+      id: -1,
+      player: false,
+    },
+    {
+      id: -1,
+      player: false,
+    },
+    {
+      id: -1,
+      player: false,
+    },
+    {
+      id: -1,
+      player: false,
+    },
+    {
+      id: -1,
+      player: false,
+    },
+  ]);
   const history = useHistory();
 
   useIonViewWillEnter(() => {
@@ -56,23 +78,28 @@ function ViewScene() {
     setTimeout(() => playButton?.classList.remove("filter"), 200);
   }
 
-  const playList = () => {
-    const list: Howl[] = [];
+  useEffect(() => {
+    let _list: Howl[] = [];
     recorder.forEach((step) => {
-      if (step.player) {
-        howls[step.id].stop();
-        list.push(howls[step.id]);
-      }
+      if (step.player) _list.push(howls[step.id]);
     });
+    console.log(_list);
+    setList(_list);
+  }, [recorder]);
 
-    list[0].play();
-
-    for (let i = 0; i < list.length; i++) {
-      list[i].on("end", () => {
-        if (i !== list.length - 1) {
-          list[i + 1].play();
-        }
+  const playList = () => {
+    if (list.length) {
+      // TODO toast uso de la app
+      howls.forEach((sound, index) => {
+        if (index) sound.stop();
       });
+      list[0].play();
+
+      for (let i = 0; i < list.length - 1; i++) {
+        list[i].once("end", () => {
+          list[i + 1].play();
+        });
+      }
     }
   };
 
@@ -95,7 +122,6 @@ function ViewScene() {
         },
         onEnd: (ev) => {
           setDragging(0);
-          console.log(ev.currentX / windowWidth, ev.currentY / windowHeight);
           for (let i = 0; i < 5; i++) {
             if (
               ev.currentX > (0.27 + i * 0.1) * windowWidth &&
@@ -108,7 +134,6 @@ function ViewScene() {
                 player: true,
                 id: m.id,
               };
-              console.log(_recorder);
               setRecorder(_recorder);
             }
           }
@@ -118,48 +143,46 @@ function ViewScene() {
     }
   });
 
-  useEffect(() => {
-    for (let k = 0; k < 5; k++) {
-      if (recorder[k] !== undefined) {
-        scene?.sounds.slice(1).forEach((m) => {
-          if (recorder[k].id === m.id) {
-            const smallImageRef = document.getElementById(`${k}-${m.id}-small`);
+  for (let k = 0; k < 5; k++) {
+    if (recorder[k] !== undefined) {
+      scene?.sounds.slice(1).forEach((m) => {
+        if (recorder[k].id === m.id) {
+          const smallImageRef = document.getElementById(`${k}-${m.id}-small`);
 
-            if (smallImageRef !== null) {
-              const gestureRemove: Gesture = createGesture({
-                el: smallImageRef,
-                threshold: 15,
-                gestureName: "soundsRemoving",
-                onStart: (ev) => {
-                  setDragging(m.id);
-                },
-                onMove: (ev) => {
-                  setCurrentX(ev.currentX);
-                  setCurrentY(ev.currentY);
-                },
-                onEnd: (ev) => {
-                  setDragging(0);
+          if (smallImageRef !== null) {
+            const gestureRemove: Gesture = createGesture({
+              el: smallImageRef,
+              threshold: 15,
+              gestureName: "soundsRemoving",
+              onStart: (ev) => {
+                setDragging(m.id);
+              },
+              onMove: (ev) => {
+                setCurrentX(ev.currentX);
+                setCurrentY(ev.currentY);
+              },
+              onEnd: (ev) => {
+                setDragging(0);
 
-                  if (
-                    ev.currentY < 0.89 * windowHeight ||
-                    ev.currentY > 0.96 * windowHeight
-                  ) {
-                    let _recorder = [...recorder];
-                    _recorder[k] = {
-                      player: false,
-                      id: m.id,
-                    };
-                    setRecorder(_recorder);
-                  }
-                },
-              });
-              gestureRemove.enable();
-            }
+                if (
+                  ev.currentY < 0.89 * windowHeight ||
+                  ev.currentY > 0.96 * windowHeight
+                ) {
+                  let _recorder = [...recorder];
+                  _recorder[k] = {
+                    player: false,
+                    id: m.id,
+                  };
+                  setRecorder(_recorder);
+                }
+              },
+            });
+            gestureRemove.enable();
           }
-        });
-      }
+        }
+      });
     }
-  }, [recorder]);
+  }
 
   useEffect(() => {
     if (scene && scene !== null) {
@@ -211,6 +234,9 @@ function ViewScene() {
           history.push("/");
         }}
         routerDirection="back"
+        style={{
+          zIndex: 100,
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -224,7 +250,7 @@ function ViewScene() {
             stroke={scene?.primaryColor}
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="32"
+            strokeWidth="36"
             d="M249.38 336L170 256l79.38-80M181.03 256H342"
           />
           <path
@@ -232,7 +258,7 @@ function ViewScene() {
             fill="none"
             stroke={scene?.primaryColor}
             strokeMiterlimit="10"
-            strokeWidth="32"
+            strokeWidth="36"
           />
         </svg>
       </IonButton>
@@ -320,6 +346,7 @@ function ViewScene() {
                             opacity: 1,
                             // left: `${200 + 66 * k}px`,
                             left: `${-18 + 10 * k}vw`,
+                            zIndex: 100,
                           }
                         : {}
                     }
