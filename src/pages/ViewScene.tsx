@@ -10,6 +10,8 @@ import {
   createGesture,
   Gesture,
   IonButton,
+  useIonViewDidEnter,
+  IonLoading,
 } from "@ionic/react";
 import { Howl, Howler } from "howler";
 import { useParams } from "react-router";
@@ -29,6 +31,7 @@ function ViewScene() {
   const [currentX, setCurrentX] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(0);
+  const [showLoading, setShowLoading] = useState(true);
 
   const [recorder, setRecorder] = useState<
     {
@@ -61,9 +64,13 @@ function ViewScene() {
 
   useIonViewWillEnter(() => {
     Howler.autoUnlock = false;
-
     const _scene = getScene(parseInt(params.id, 10));
     setScene(_scene);
+    setShowLoading(true);
+  });
+
+  useIonViewDidEnter(() => {
+    setShowLoading(false);
   });
 
   function soundSelected(id: any) {
@@ -83,7 +90,6 @@ function ViewScene() {
     recorder.forEach((step) => {
       if (step.player) _list.push(howls[step.id]);
     });
-    console.log(_list);
     setList(_list);
   }, [recorder]);
 
@@ -227,6 +233,12 @@ function ViewScene() {
         height: "auto",
       }}
     >
+      <IonLoading
+        cssClass="loading"
+        isOpen={showLoading}
+        onDidDismiss={() => setShowLoading(false)}
+        spinner={"circles"}
+      />
       <IonButton
         className="backButton"
         fill="default"
@@ -308,6 +320,13 @@ function ViewScene() {
                     soundSelected(m.name);
                     player[m.id] ? howls[m.id].stop() : howls[m.id].play();
                     player[m.id] = !player[m.id];
+
+                    if (player[m.id]) {
+                      howls[m.id].once("end", () => {
+                        console.log("termine");
+                        player[m.id] = !player[m.id];
+                      });
+                    }
                   }}
                 ></IonImg>
               </IonCol>

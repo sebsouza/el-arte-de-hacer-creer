@@ -102,3 +102,12 @@ ion-col {
 .image-button {
   height: 22vh;
 }
+
+.loading {
+  --backdrop-opacity: 0.9;
+  --height: 10rem;
+  --background: none;
+  --spinner-color: rgb(0, 97, 134);
+  --width: 20rem;
+  transform: scale(3);
+}

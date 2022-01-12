@@ -10,6 +10,8 @@ import {
   IonGrid,
   useIonViewWillLeave,
   IonImg,
+  IonLoading,
+  useIonViewDidEnter,
 } from "@ionic/react";
 import "./Home.css";
 
@@ -20,6 +22,7 @@ import { background } from "../util";
 
 const Home: React.FC = () => {
   const [Scenes, setScenes] = useState<Scene[]>([]);
+  const [showLoading, setShowLoading] = useState(true);
 
   var _howl: Howl;
 
@@ -32,10 +35,13 @@ const Home: React.FC = () => {
   useIonViewWillEnter(() => {
     const msgs = getScenes();
     setScenes(msgs);
-
     _howl.play();
+    setShowLoading(true);
   });
 
+  useIonViewDidEnter(() => {
+    setShowLoading(false);
+  });
   useIonViewWillLeave(() => {
     _howl.stop();
   });
@@ -52,6 +58,12 @@ const Home: React.FC = () => {
           }}
           className="grid"
         >
+          <IonLoading
+            cssClass="loading"
+            isOpen={showLoading}
+            onDidDismiss={() => setShowLoading(false)}
+            spinner={"circles"}
+          />
           <IonRow className="ion-justify-content-center header-home">
             <IonCol>
               <IonImg
