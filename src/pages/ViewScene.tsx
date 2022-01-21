@@ -20,7 +20,7 @@ import "./ViewScene.css";
 import { useHistory } from "react-router";
 import { audio, background } from "../util";
 import { img } from "../util";
-import { GESTURE_CONTROLLER } from "@ionic/core/dist/types/utils/gesture";
+//import { GESTURE_CONTROLLER } from "@ionic/core/dist/types/utils/gesture";
 
 function ViewScene() {
   const [scene, setScene] = useState<Scene>();
@@ -323,7 +323,6 @@ function ViewScene() {
 
                     if (player[m.id]) {
                       howls[m.id].once("end", () => {
-                        console.log("termine");
                         player[m.id] = !player[m.id];
                       });
                     }
