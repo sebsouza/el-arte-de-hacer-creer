@@ -54,9 +54,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  margin: 6%;
+  margin-top: 3%;
   height: auto;
   text-align: center;
+  width: 5rem;
 }
 
 .filter {
@@ -101,6 +102,13 @@ ion-col {
 }
 .image-button {
   height: 22vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .image-button {
+    height: 12vh;
+    margin-top: 8vh;
+  }
 }
 
 .loading {
