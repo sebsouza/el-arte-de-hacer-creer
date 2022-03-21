@@ -7,9 +7,9 @@ import {
   CreateAnimation,
 } from "@ionic/react";
 import { useRef } from "react";
-import { Scene } from "../data/scenes";
+import { Scene } from "../../data/scenes";
 import "./SceneListItem.css";
-import { img } from "../util";
+import { img } from "../../util";
 import { useHistory } from "react-router";
 
 interface SceneListItemProps {
@@ -24,7 +24,6 @@ const SceneListItem: React.FC<SceneListItemProps> = ({ scene }) => {
 
   const handleClick = async () => {
     if (animationRef.current !== null) {
-      // Set up animation manually
       await animationRef.current.setupAnimation({
         duration: 1000,
         fill: "none",

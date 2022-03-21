@@ -1,27 +1,23 @@
-import SceneListItem from "../components/SceneListItem";
 import { useState } from "react";
-import { Scene, getScenes } from "../data/scenes";
 import {
-  IonCol,
   IonContent,
   IonPage,
   useIonViewWillEnter,
-  IonRow,
   IonGrid,
   useIonViewWillLeave,
-  IonImg,
-  IonLoading,
   useIonViewDidEnter,
 } from "@ionic/react";
 import "./Home.css";
 
 import { Howl } from "howler";
-import { audio, img } from "../util";
+import { audio } from "../util";
 
 import { background } from "../util";
+import HomeHeader from "../components/Home/HomeHeader";
+import HomeScenes from "../components/Home/HomeScenes";
+import Loading from "../components/Loading";
 
 const Home: React.FC = () => {
-  const [Scenes, setScenes] = useState<Scene[]>([]);
   const [showLoading, setShowLoading] = useState(true);
 
   var _howl: Howl;
@@ -33,8 +29,6 @@ const Home: React.FC = () => {
   });
 
   useIonViewWillEnter(() => {
-    const msgs = getScenes();
-    setScenes(msgs);
     _howl.play();
     setShowLoading(true);
   });
@@ -42,6 +36,7 @@ const Home: React.FC = () => {
   useIonViewDidEnter(() => {
     setShowLoading(false);
   });
+
   useIonViewWillLeave(() => {
     _howl.stop();
   });
@@ -58,28 +53,11 @@ const Home: React.FC = () => {
           }}
           className="grid"
         >
-          <IonLoading
-            cssClass="loading"
-            isOpen={showLoading}
-            onDidDismiss={() => setShowLoading(false)}
-            spinner={"circles"}
-          />
-          <IonRow className="ion-justify-content-center header-home">
-            <IonCol>
-              <IonImg
-                className="image-header"
-                src={img(`homeHeader.png`)}
-              ></IonImg>
-            </IonCol>
-          </IonRow>
+          <Loading showLoading={showLoading} setShowLoading={setShowLoading} />
 
-          <IonRow className="row">
-            {Scenes.map((m) => (
-              <IonCol className="col" key={m.id}>
-                <SceneListItem key={m.id} scene={m} />
-              </IonCol>
-            ))}
-          </IonRow>
+          <HomeHeader />
+
+          <HomeScenes />
         </IonGrid>
       </IonContent>
     </IonPage>
